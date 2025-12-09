@@ -1,0 +1,64 @@
+Category: videos
+{
+  "buttons": [
+    {
+      "href": "page:home",
+      "id": "01",
+      "linkType": "page",
+      "styles": {
+        "background": "",
+        "border": ""
+      },
+      "background": "",
+      "border": "",
+      "title": "Tell me more"
+    }
+  ],
+  "video": {
+    "type": "youtube",
+    "videoId": "TuYQtX06ZMs",
+    "videoUrl": "https://www.youtube.com/watch?v=TuYQtX06ZMs",
+    "autoPlay": false,
+    "loop": false,
+    "controls": true,
+    "videoThumbnailUrl": "https://img.youtube.com/vi/TuYQtX06ZMs/maxresdefault.jpg"
+  },
+  "button": "",
+  "description": "<font class=\"cstm-cl kv-ee-custom-text-cl4\">Com mais de 20 anos de experi\u00eancia, criamos o primeiro ecossistema completo de leil\u00f5es do Brasil, reunindo forma\u00e7\u00e3o, franquia, tecnologia e consultoria em um \u00fanico modelo.</font>",
+  "subtitle": "Learn more about what we do",
+  "title": "O Ecossistema E-Lance e My Bid",
+  "_placeholders": {
+    "subtitle": "Learn more about what we do",
+    "description": "Add a description here."
+  },
+  "_toggle": {
+    "title": true,
+    "description": true,
+    "buttons": false,
+    "subtitle": false
+  },
+  "dropShadow": true,
+  "sectionSize": "kv-ee-section--lg",
+  "contentAlignment": "kv-ee-align-left",
+  "background": {
+    "colorIndex": 0,
+    "divider": {
+      "type": "curveAsym",
+      "seed": 1,
+      "layers": 1,
+      "layerOffset": 25,
+      "dividerHeight": 100,
+      "randomizeLayers": true,
+      "flipX": false,
+      "flipY": false,
+      "active": false,
+      "overlap": 0
+    },
+    "sectionHeight": 588,
+    "sectionWidth": 1148,
+    "shouldRenderDivider": false,
+    "prevShouldRenderDivider": false
+  },
+  "fullPage": false
+}
+====================

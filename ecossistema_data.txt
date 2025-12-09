@@ -1,0 +1,8 @@
+Page Title: O Ecossistema E-Lance e My Bid
+--------------------
+Category: videos
+Title: O Ecossistema E-Lance e My Bid
+Subtitle: Learn more about what we do
+Description: <font class="cstm-cl kv-ee-custom-text-cl4">Com mais de 20 anos de experiência, criamos o primeiro ecossistema completo de leilões do Brasil, reunindo formação, franquia, tecnologia e consultoria em um único modelo.</font>
+Button: Tell me more -> page:home
+====================

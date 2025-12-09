@@ -1,0 +1,166 @@
+Page Title: Escola de Formação para novos Leiloeiros
+--------------------
+Category: mediatext
+Title: Escola de Formação para Leiloeiros
+Subtitle: <font class="cstm-cl kv-ee-custom-text-cl4" style="font-weight: normal;">A Escola E-Lance | My Bid é referência nacional na formação de leiloeiros oficiais.&nbsp;</font>
+Description: <font class="cstm-cl kv-ee-custom-text-cl4">Nossa missão é capacitar profissionais que desejam ingressar nessa carreira, oferecendo todo o suporte jurídico, prático e mercadológico necessário para atuar com segurança e excelência..</font>
+Image: https://storage.googleapis.com/production-hostgator-brasil-v1-0-3/873/1757873/wOfpXRsp/c4234825cd504740bc4546c390e93867
+List Items:
+  - Title: Image
+    Description: Describe the picture or give more information. ​​​​​​​
+    Price: None
+  - Title: Image
+    Description: Describe the picture or give more information. ​​​​​​​
+    Price: None
+  - Title: Image
+    Description: Describe the picture or give more information. ​​​​​​​
+    Price: None
+====================
+Category: text
+Title: Para quem ainda não é leiloeiro
+Subtitle: <font class="cstm-cl kv-ee-custom-text-cl4">Oferecemos o caminho completo para quem deseja se tornar leiloeiro oficial:</font>
+Description: You can edit text on your website by double clicking on a text box on your website. Alternatively, when you select a text box a settings menu will appear. Selecting 'Edit Text' from this menu will also allow you to edit the text within this text box. Remember to keep your wording friendly, approachable and easy to understand as if you were talking to your customer. You can edit text on your website by double clicking on a text box on your website. Alternatively, when you select a text box a settings menu will appear. Selecting 'Edit Text' from this menu will also allow you to edit the text within this text box. Remember to keep your wording friendly, approachable and easy to understand as if you were talking to your customer
+Image: https://images.unsplash.com/photo-1516321318423-f06f85e504b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8OXx8Y29uc3VsdGluZ3xlbnwwfHx8fDE3NTg4NzEwNzd8MA&ixlib=rb-4.1.0&q=80&w=1080
+List Items:
+  - Title: Add a title
+    Description: <font class="cstm-cl kv-ee-custom-text-cl4">✔ Orientação sobre requisitos legais e inscrição na Junta Comercial.<br><br>✔ Treinamento do "zero", mesmo para quem nunca participou de um leilão.<br><br>✔ Inscrição em diversas varas judiciais para atuar como leiloeiro.<br><br>✔ Estruturação de escritório e operação de leilões.<br><br>✔ Estratégias de marketing e prospecção de clientes.<br><br>✔ Gestão financeira, jurídica e administrativa do negócio.<br><br>✔&nbsp;<b>Objetivo</b>: formar novos leiloeiros aptos a atuar de forma independente e profissional.</font>
+    Price: None
+====================
+Category: mediatext
+Title: Quem coordena a escola
+Subtitle: <font class="cstm-cl kv-ee-custom-text-cl4">O programa é conduzido por <b>Jerônimo Pompeu de Souza</b>, especialista com mais de 20 anos de experiência em leilões:<br><br>✔ Ex-Gerente de Alienações da Caixa Econômica Federal.<br>✔ Corretor de imóveis e arrematante profissional (+80 imóveis arrematados).<br>✔ Consultor de leiloeiros em todo o Brasil (+300 processos organizados).<br>✔ Fundador da E-Lance, primeira rede de franquias e escola para novos leiloeiros.<br>✔ Formação acadêmica: USP (Comunicação), MBA em Gestão de Empresas (FGV) e Pós-graduação em Direito Imobiliário (Damásio).</font>
+Description: Add a description here.
+Image: https://storage.googleapis.com/production-hostgator-brasil-v1-0-3/873/1757873/wOfpXRsp/bc099e219fde438a8f9ef415550b79eb
+List Items:
+  - Title: Image
+    Description: Describe the picture or give more information. ​​​​​​​
+    Price: None
+  - Title: Image
+    Description: Describe the picture or give more information. ​​​​​​​
+    Price: None
+  - Title: Image
+    Description: Describe the picture or give more information. ​​​​​​​
+    Price: None
+====================
+Category: text
+Title: Diferenciais da Escola de Formação
+Subtitle: Learn more about what we do
+Description: <font class="cstm-cl kv-ee-custom-text-cl4">✔ Treinamento prático com base em estudos de caso reais.<br>✔ Acompanhamento contínuo e consultoria individualizada.<br>✔ Networking com leiloeiros de todo o Brasil.<br>✔ Material exclusivo e certificado de conclusão.</font>
+Image: https://images.unsplash.com/photo-1600880292203-757bb62b4baf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8MTV8fGNvbnN1bHRpbmd8ZW58MHx8fHwxNzU4ODcxMDc3fDA&ixlib=rb-4.1.0&q=80&w=1080
+List Items:
+  - Title: Add a title
+    Description: You can use this element to explain to visitors what you do or inform them about other subjects. For instance, what is your passion and why or what does your company offer, i.e. products and services. You can hide this element in the menu on the right
+    Price: None
+  - Title: Add a title
+    Description: You can use this element to explain to visitors what you do or inform them about other subjects. For instance, what is your passion and why or what does your company offer, i.e. products and services. You can hide this element in the menu on the right
+    Price: None
+====================
+Category: text
+Title: Exigências para se Tornar Leiloeiro
+Subtitle: Learn more about what we do
+Description: <font class="cstm-cl kv-ee-custom-text-cl4">Para atuar como leiloeiro oficial, a legislação brasileira estabelece alguns requisitos indispensáveis:<br>✔ Idade mínima de 25 anos.<br>✔ Idoneidade cadastral: não possuir protestos em cartório.<br>✔ Exclusividade da atividade: não ter empresa registrada em seu nome.<br>✔ Depósito de caução na Junta Comercial do estado de atuação, conforme abaixo.</font>
+Image: https://images.unsplash.com/photo-1600880292203-757bb62b4baf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8MTV8fGNvbnN1bHRpbmd8ZW58MHx8fHwxNzU4ODcxMDc3fDA&ixlib=rb-4.1.0&q=80&w=1080
+List Items:
+  - Title: Add a title
+    Description: You can use this element to explain to visitors what you do or inform them about other subjects. For instance, what is your passion and why or what does your company offer, i.e. products and services. You can hide this element in the menu on the right
+    Price: None
+  - Title: Add a title
+    Description: You can use this element to explain to visitors what you do or inform them about other subjects. For instance, what is your passion and why or what does your company offer, i.e. products and services. You can hide this element in the menu on the right
+    Price: None
+====================
+Category: menu
+Title: Valores da Caução para Registro de Leiloeiros
+Subtitle: All our food is cooked to order
+Description: <font class="cstm-cl kv-ee-custom-text-cl4">Para se inscrever como leiloeiro oficial é obrigatório realizar o depósito de caução na Junta Comercial do estado onde deseja atuar. O valor varia conforme a legislação de cada unidade federativa:</font>
+List Items:
+  - Title: Acre
+    Description: Add a description here
+    Price: R$ 40.000,00
+  - Title: Alagoas
+    Description: Add a description here
+    Price: R$ 50.000,00
+  - Title: Amapá
+    Description: Add a description here
+    Price: R$ 45.774,10
+  - Title: Amazonas
+    Description: Add a description here
+    Price: R$ 60.000,00
+  - Title: Bahia
+    Description: Add a description here
+    Price: R$ 30.000,00
+  - Title: Ceará
+    Description: Add a description here
+    Price: R$ 50.000,00
+  - Title: Distrito Federal
+
+
+    Description: Add a description here
+    Price: R$ 50.000,00
+  - Title: Espírito Santo
+    Description: Add a description here
+    Price: R$ 80.000,00
+  - Title: Goiás
+    Description: Add a description here
+    Price: R$ 45.000,00
+  - Title: Maranhão
+    Description: Add a description here
+    Price: R$ 50.000,00
+  - Title: Mato Grosso
+    Description: Add a description here
+    Price: R$ 40.000,00
+  - Title: Mato Grosso do Sul
+    Description: Add a description here
+    Price: R$ 100.000,00
+  - Title: Minas Gerais
+    Description: You can edit text by clicking on a text box
+    Price: 
+R$ 80.000,00
+  - Title: Pará
+    Description: You can edit text by clicking on a text box
+    Price: R$ 15.000,00
+  - Title: Paraíba
+    Description: You can edit text by clicking on a text box
+    Price: R$ 30.000,00
+  - Title: Paraná
+    Description: You can edit text by clicking on a text box
+    Price: R$ 100.000,00
+  - Title: Pernambuco
+    Description: You can edit text by clicking on a text box
+    Price: R$ 40.000,00
+  - Title: Piauí
+    Description: You can edit text by clicking on a text box
+    Price: R$ 60.000,00
+  - Title: Rio de Janeiro
+    Description: You can edit text by clicking on a text box
+    Price: R$ 90.000,00
+  - Title: Rio Grande do Norte
+    Description: You can edit text by clicking on a text box
+    Price: R$ 30.000,00
+  - Title: Rio Grande do Sul
+    Description: You can edit text by clicking on a text box
+    Price: R$ 42.510,00
+  - Title: Rondônia
+    Description: You can edit text by clicking on a text box
+    Price: R$ 30.000,00
+  - Title: Roraima
+    Description: You can edit text by clicking on a text box
+    Price: R$ 20.000,00
+  - Title: São Paulo
+    Description: You can edit text by clicking on a text box
+    Price: R$ 120.000,00
+  - Title: Santa Catarina
+    Description: You can edit text by clicking on a text box
+    Price: R$ 70.000,00
+  - Title: Sergipe
+    Description: You can edit text by clicking on a text box
+    Price: R$ 20.000,00
+  - Title: Tocantins
+    Description: You can edit text by clicking on a text box
+    Price: R$ 50.000,00
+====================
+Category: contact
+Title: Pronto para começar?
+Subtitle: Get in touch
+Description: Possui todas as exigências e o valor necessário para o depósito de caução?<br><br>Então preencha o formulário abaixo e torne-se um leiloeiro agora mesmo.<br><br>Dê o primeiro passo para sua nova carreira.
+Image: https://images.unsplash.com/photo-1530971013997-e06bb52a2372?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8MTh8fGNvbnN1bHRpbmd8ZW58MHx8fHwxNzU4ODcxMDc3fDA&ixlib=rb-4.1.0&q=80&w=1080
+====================

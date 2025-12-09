@@ -1,0 +1,173 @@
+Page Title: Mentoria Trilha do Arrematante
+--------------------
+Category: heroimage
+Title: Mentoria:<br>Trilha do Arrematante
+Subtitle: Isso não é apenas um curso sobre leilões.
+Description: A única mentoria de
+acompanhamento personalizado
+para você arrematar imóveis em
+leilão com clareza, desocupar com segurança e revender com lucro.
+Image: https://images.unsplash.com/photo-1507668077129-56e32842fceb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8MTN8fGNvbnN1bHRpbmd8ZW58MHx8fHwxNzU5MTIyNTY4fDA&ixlib=rb-4.1.0&q=80&w=1080
+Button: Quero fazer parte -> page:1759170074795
+====================
+Category: text
+Title: Aprenda fazendo
+Subtitle: <font class="cstm-cl kv-ee-custom-text-cl4" style="font-weight: normal;">Vamos arrematar um imóvel juntos, do garimpo à revenda.</font>
+Description: <font class="cstm-cl kv-ee-custom-text-cl4">Você participa de cada etapa: escolha do leilão, pesquisa de mercado, análise do edital, disputa, contratação, registro, desocupação do imóvel, reforma e revenda (ou aluguel).<br><br>O imóvel é registrado em seu nome e todo lucro fica para você.<br><br>A mentoria só termina quando o imóvel for vendido ou alugado.</font>
+Image: https://images.unsplash.com/photo-1578574577315-3fbeb0cecdc2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8Nnx8Y29uc3VsdGluZ3xlbnwwfHx8fDE3NTkxMjI1Njh8MA&ixlib=rb-4.1.0&q=80&w=1080
+Button: Quero fazer parte -> page:1759170074795
+List Items:
+  - Title: Add a title
+    Subtitle: None
+    Description: You can use this element to explain to visitors what you do or inform them about other subjects. For instance, what is your passion and why or what does your company offer, i.e. products and services. You can hide this element in the menu on the right
+  - Title: Add a title
+    Subtitle: None
+    Description: You can use this element to explain to visitors what you do or inform them about other subjects. For instance, what is your passion and why or what does your company offer, i.e. products and services. You can hide this element in the menu on the right
+====================
+Category: text
+Title: O que vamos fazer, lado a lado<br><br>
+Subtitle: Learn more about what we do
+Description: <font class="cstm-cl kv-ee-custom-text-cl4"><b>1. Tese &amp; Planejamento</b> — perfil, objetivos, capacidade de aporte e tese (tipo de imóvel, região, ticket-alvo).<br><b>2.	Garimpo de oportunidades</b> — busca ativa em plataformas de leilão extrajudicial, triagem e shortlist.<br><b>3.	Due Diligence completa</b> — edital (riscos escondidos), laudo, valor de mercado, matrícula, processos/penhoras, débitos (IPTU/condomínio) e viabilidade econômico-financeira.<br><b>4.	Estratégia de lances</b> — teto, passos, gatilhos e cronograma; habilitação nas plataformas.<br><b>5.	Participação no leilão</b> — acompanhamento em tempo real e decisão conjunta.<br><b>6.	Compra em sociedade</b> — aquisição proporcional ao aporte, regras de governança e rateio de custos/resultados.<br><b>7.	Pós-compra &amp; Posse </b>— plano de desocupação amigável (roteiro) e taxa de ocupação quando aplicável; encaminhamento ao advogado quando necessário.<br><b>8.	Reforma &amp; Valor</b> — escopo inteligente (o que fazer / não fazer), orçamentos e controle de custos.<br><b>9.	Venda &amp; Liquidação </b>— precificação, divulgação e negociação; distribuição de lucros conforme os percentuais.</font><br>
+Image: https://images.unsplash.com/photo-1431540015161-0bf868a2d407?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8MjV8fGNvbnN1bHRpbmd8ZW58MHx8fHwxNzU5MTIyNTY4fDA&ixlib=rb-4.1.0&q=80&w=1080
+Button: Read more -> page:home
+List Items:
+  - Title: Add a title
+    Subtitle: None
+    Description: You can use this element to explain to visitors what you do or inform them about other subjects. For instance, what is your passion and why or what does your company offer, i.e. products and services. You can hide this element in the menu on the right
+  - Title: Add a title
+    Subtitle: None
+    Description: You can use this element to explain to visitors what you do or inform them about other subjects. For instance, what is your passion and why or what does your company offer, i.e. products and services. You can hide this element in the menu on the right
+====================
+Category: text
+Title: O que você recebe<br><br>
+Subtitle: Learn more about what we do
+Description: <font class="custom-font" style="font-family: var(--kv-ee-body-font-family); font-weight: var(--kv-ee-body-font-weight);" color="#123456">• Acesso ao meu método, planilhas e checklists<br>• Dossiê de cada oportunidade (riscos, custos, margem, cenários)<br>• Planilha de viabilidade (capex, custos, preço, ROI)<br>• Roteiros e minutas operacionais (ocupante, reforma, venda)<br>• Acompanhamento até a revenda (ou locação)</font><br>
+Image: https://images.unsplash.com/photo-1431540015161-0bf868a2d407?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8MjV8fGNvbnN1bHRpbmd8ZW58MHx8fHwxNzU5MTIyNTY4fDA&ixlib=rb-4.1.0&q=80&w=1080
+Button: Read more -> page:home
+List Items:
+  - Title: Add a title
+    Subtitle: None
+    Description: You can use this element to explain to visitors what you do or inform them about other subjects. For instance, what is your passion and why or what does your company offer, i.e. products and services. You can hide this element in the menu on the right
+  - Title: Add a title
+    Subtitle: None
+    Description: You can use this element to explain to visitors what you do or inform them about other subjects. For instance, what is your passion and why or what does your company offer, i.e. products and services. You can hide this element in the menu on the right
+====================
+Category: products
+Title: É assim que organizamos a<br>Mentoria "Trilha do Arrematante"
+Subtitle: The products we offer
+Description: Add a description here.
+List Items:
+  - Title: <font class="cstm-fnt cstm-cl kv-ee-custom-text-cl4" style="font-size: 96.435%; font-weight: normal;">Acompanhamento diário pelo WhatsApp</font>
+    Subtitle: Head Chef
+    Description: <font class="cstm-cl kv-ee-custom-text-cl4">Acesso direto a um especialista para tirar dúvidas e receber orientação durante todo o período.</font>
+    Image: https://storage.googleapis.com/production-hostgator-brasil-v1-0-3/873/1757873/wOfpXRsp/feed15a593c74afe9abefb6b1cf9ffe7
+    Link: page:home
+  - Title: <font class="cstm-cl kv-ee-custom-text-cl4" style="font-weight: normal;">Reunião de diagnóstico e nivelamento</font>
+    Subtitle: Chef
+    Description: <font class="cstm-cl kv-ee-custom-text-cl4">Encontro individual para entender seu momento e definir o caminho mais adequado para você.</font>
+    Image: https://storage.googleapis.com/production-hostgator-brasil-v1-0-3/873/1757873/wOfpXRsp/a11bf422fc444eafb23e75d456632ecc
+    Link: page:home
+  - Title: <font class="cstm-cl kv-ee-custom-text-cl4" style="font-weight: normal;">Análise de pré-leilão do seu arremate</font>
+    Subtitle: Assistent Chef
+    Description: <font class="cstm-cl kv-ee-custom-text-cl4">Nosso time revisa junto com você o seu primeiro arremate e entrega um documento com os riscos e oportunidades do imóvel estudado.</font>
+    Image: https://storage.googleapis.com/production-hostgator-brasil-v1-0-3/873/1757873/wOfpXRsp/27d280ad39434c57ab9739f07c7fcee0
+    Link: page:home
+  - Title: <font class="cstm-cl kv-ee-custom-text-cl4" style="font-weight: normal;">Assessoria na desocupação</font>
+    Subtitle: None
+    Description: <font class="cstm-cl kv-ee-custom-text-cl4">Utilizamos nossos modelos de notificações para desocupação e cobrança de taxa de ocupação.</font>
+    Image: https://storage.googleapis.com/production-hostgator-brasil-v1-0-3/873/1757873/wOfpXRsp/867aaa224fc0470fa6c228fc03f65431
+    Link: page:home
+  - Title: <font class="cstm-cl kv-ee-custom-text-cl4" style="font-weight: normal;">Assessoria na reforma</font>
+    Subtitle: None
+    Description: <font class="cstm-cl kv-ee-custom-text-cl4">Orientamos o que fazer no imóvel e indicamos profissionais.</font>
+    Image: https://storage.googleapis.com/production-hostgator-brasil-v1-0-3/873/1757873/wOfpXRsp/0f7aa0f9946347a4a9e8c8e64aabbeeb
+    Link: page:home
+  - Title: <font class="cstm-cl kv-ee-custom-text-cl4" style="font-weight: normal;">Assessoria na venda</font>
+    Subtitle: None
+    Description: <font class="cstm-cl kv-ee-custom-text-cl4">Auxiliamos na divulgação do imóvel e contratação de imobiliárias.</font>
+    Image: https://storage.googleapis.com/production-hostgator-brasil-v1-0-3/873/1757873/wOfpXRsp/f51c8c24825e49dd88aedb22ef3c091a
+    Link: page:home
+====================
+Category: products
+Title: Bônus Exclusivos
+Subtitle: <font class="cstm-cl kv-ee-custom-text-cl4">Ao contratar a Mentoria <b>"Trilha do Arrematante"</b> você recebe 2 bônus gratuitamente:</font>
+Description: Add a description here.
+List Items:
+  - Title: <font color="#151d38">Bônus 01</font>
+    Subtitle: Head Chef
+    Description: <font class="cstm-cl kv-ee-custom-text-cl4">Curso para arrematantes de imóveis</font>
+    Image: https://storage.googleapis.com/production-hostgator-brasil-v1-0-3/873/1757873/wOfpXRsp/5a1bc58ef391456a8315e6e2bdf17ae3
+    Link: page:home
+  - Title: <font class="cstm-cl kv-ee-custom-text-cl4">Bônus 02</font>
+    Subtitle: Chef
+    Description: <font class="cstm-cl kv-ee-custom-text-cl4">Curso para compra de imóveis da Caixa.</font>
+    Image: https://storage.googleapis.com/production-hostgator-brasil-v1-0-3/873/1757873/wOfpXRsp/976b8d7a0b4b4b57a1c6fb55d0e7ca38
+    Link: page:home
+====================
+Category: products
+Title: Exemplos de arrematações lucrativas
+Subtitle: <font class="cstm-cl kv-ee-custom-text-cl4">Temos metodologia prática de quem já arrematou mais de 70 imóveis. Veja exemplos:</font>
+Description: Add a description here.
+List Items:
+  - Title: <font class="cstm-cl kv-ee-custom-text-cl4">Sobrado em Perús</font>
+    Subtitle: Head Chef
+    Description: <font class="cstm-cl kv-ee-custom-text-cl4">Lucro de R$ 413.200,00</font>
+    Image: https://storage.googleapis.com/production-hostgator-brasil-v1-0-3/873/1757873/wOfpXRsp/ea74ac01b0964de0a3411299f5f03e9b
+    Link: https://storage.googleapis.com/production-hostgator-brasil-v1-0-3/873/1757873/wOfpXRsp/013ad34868be4cb6afbd5a6430c728ef?fileName=Matricula143364.pdf
+  - Title: <font class="cstm-cl kv-ee-custom-text-cl4">Terreno em Bauru</font>
+    Subtitle: Chef
+    Description: <font class="cstm-cl kv-ee-custom-text-cl4">Lucro de R$ 263.250,00</font>
+    Image: https://storage.googleapis.com/production-hostgator-brasil-v1-0-3/873/1757873/wOfpXRsp/c98a88bfff4b4ce0b4d28f7dbc9763ae
+    Link: https://storage.googleapis.com/production-hostgator-brasil-v1-0-3/873/1757873/wOfpXRsp/d14a4f96a271426892ffd31768a040de?fileName=Matrículas2.pdf
+  - Title: <font class="cstm-cl kv-ee-custom-text-cl4">Terreno em Bauru</font>
+    Subtitle: Assistent Chef
+    Description: <font class="cstm-cl kv-ee-custom-text-cl4">Lucro de R$&nbsp;81.454,30</font>
+    Image: https://storage.googleapis.com/production-hostgator-brasil-v1-0-3/873/1757873/wOfpXRsp/b2bde093c85a468a89bd67740cb0ff46
+    Link: https://storage.googleapis.com/production-hostgator-brasil-v1-0-3/873/1757873/wOfpXRsp/8e72a6f3e46741458e26c4189f0cd3d3?fileName=Matriculas.pdf
+====================
+Category: mediatext
+Title: <font class="cstm-cl kv-ee-custom-text-cl4">É hora de partir para a prática.</font>
+Subtitle: <font class="cstm-cl kv-ee-custom-text-cl4" style="font-weight: normal;">Chega de estudar sozinho.</font>
+Description: <font class="cstm-cl kv-ee-custom-text-cl4">A mentoria Trilha do Arrematante foi feita pra quem quer parar de acumular teoria e começar a arrematar com lucro e segurança.<br><br>Não tem enrolação.<br>Tem plano, time e ação.</font>
+Image: https://images.unsplash.com/39/lIZrwvbeRuuzqOoWJUEn_Photoaday_CSD%20%281%20of%201%29-5.jpg?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8M3x8Y29uc3VsdGluZ3xlbnwwfHx8fDE3NTkxMjI1Njh8MA&ixlib=rb-4.1.0&q=80&w=1080
+Button: Quero fazer parte agora -> page:1759170074795
+List Items:
+  - Title: Image
+    Subtitle: Subtitle
+    Description: Describe the picture or give more information. ​​​​​​​
+    Image: https://images.unsplash.com/photo-1599453052061-5c377643e4fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8MjN8fGNvbnN1bHRpbmd8ZW58MHx8fHwxNzU5MTIyNTY4fDA&ixlib=rb-4.1.0&q=80&w=1080
+  - Title: Image
+    Subtitle: Subtitle
+    Description: Describe the picture or give more information. ​​​​​​​
+    Image: https://images.unsplash.com/photo-1557804506-669a67965ba0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8MjR8fGNvbnN1bHRpbmd8ZW58MHx8fHwxNzU5MTIyNTY4fDA&ixlib=rb-4.1.0&q=80&w=1080
+  - Title: Image
+    Subtitle: Subtitle
+    Description: Describe the picture or give more information. ​​​​​​​
+    Image: https://images.unsplash.com/photo-1431540015161-0bf868a2d407?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8MjV8fGNvbnN1bHRpbmd8ZW58MHx8fHwxNzU5MTIyNTY4fDA&ixlib=rb-4.1.0&q=80&w=1080
+====================
+Category: mediatext
+Title: COM QUEM VOCÊ VAI APRENDER
+Subtitle: <font class="cstm-cl kv-ee-custom-text-cl4">JERÔNIMO POMPEU<br><br>Com mais de 21 anos de atuação no segmento de leilões, seja como gerente de leilões da Caixa Econômica Federal, como arrematante ou como leiloeiro, Jerônimo Pompeu é uma das maiores autoridades em leilões no Brasil.<br><br>• Mais de 70 imóveis arrematados<br>• Graduado em Comunicação pela USP<br>• Pós-graduado em Direito Imobiliário pelo Instituto Damásio de Direito<br>• MBA em Gestão de Empresas pela FGV<br>• Ex-Gerente do setor de leilões da Caixa Econômica Federal<br>• Sócio-proprietário da Casa e Cia Negócios Imobiliários<br>• Corretor e avaliador de Imóveis<br>• Perito judicial</font>
+Description: Add a description here.
+Image: https://storage.googleapis.com/production-hostgator-brasil-v1-0-3/873/1757873/wOfpXRsp/bfdc92faaf784b049c3f2a18dc38ab3b
+Button: Read more -> page:home
+List Items:
+  - Title: Image
+    Subtitle: Subtitle
+    Description: Describe the picture or give more information. ​​​​​​​
+    Image: https://images.unsplash.com/photo-1599453052061-5c377643e4fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8MjN8fGNvbnN1bHRpbmd8ZW58MHx8fHwxNzU5MTIyNTY4fDA&ixlib=rb-4.1.0&q=80&w=1080
+  - Title: Image
+    Subtitle: Subtitle
+    Description: Describe the picture or give more information. ​​​​​​​
+    Image: https://images.unsplash.com/photo-1557804506-669a67965ba0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8MjR8fGNvbnN1bHRpbmd8ZW58MHx8fHwxNzU5MTIyNTY4fDA&ixlib=rb-4.1.0&q=80&w=1080
+  - Title: Image
+    Subtitle: Subtitle
+    Description: Describe the picture or give more information. ​​​​​​​
+    Image: https://images.unsplash.com/photo-1431540015161-0bf868a2d407?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8MjV8fGNvbnN1bHRpbmd8ZW58MHx8fHwxNzU5MTIyNTY4fDA&ixlib=rb-4.1.0&q=80&w=1080
+====================
+Category: contact
+Title: Quero falar com a equipe
+Subtitle: Get in touch
+Description: Dese
+Image: https://images.unsplash.com/photo-1431540015161-0bf868a2d407?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8MjV8fGNvbnN1bHRpbmd8ZW58MHx8fHwxNzU5MTIyNTY4fDA&ixlib=rb-4.1.0&q=80&w=1080
+====================

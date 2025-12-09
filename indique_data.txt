@@ -1,0 +1,314 @@
+Page Title: Indique a E-Lance para realizar o seu Leilão
+--------------------
+Category: mediatext
+Title: <font class="cstm-cl kv-ee-custom-text-cl4">Indique a E-Lance para realizar o seu leilão judicial</font>
+Subtitle: <font class="cstm-cl kv-ee-custom-text-cl4" style="font-weight: normal;">É juiz, advogado ou trabalha em um escritório de advocacia?</font>
+Description: <font class="cstm-cl kv-ee-custom-text-cl4">A E-Lance realiza leilões judiciais com total segurança jurídica e suporte completo do início ao fim do processo.</font>
+Debug Binding:
+{
+  "buttons": [
+    {
+      "href": "page:home",
+      "id": "01",
+      "linkType": "page",
+      "styles": {
+        "background": "",
+        "border": ""
+      },
+      "background": "",
+      "border": "",
+      "title": "Read more"
+    }
+  ],
+  "list": [
+    {
+      "title": "Image",
+      "subtitle": "Subtitle",
+      "description": "Describe the picture or give more information. \u200b\u200b\u200b\u200b\u200b\u200b\u200b",
+      "image": {
+        "value": "https://images.unsplash.com/photo-1511376979163-f804dff7ad7b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8MjB8fGNvbnN1bHRpbmd8ZW58MHx8fHwxNzYxNjcyNTc5fDA&ixlib=rb-4.1.0&q=80&w=1080"
+      }
+    },
+    {
+      "title": "Image",
+      "subtitle": "Subtitle",
+      "description": "Describe the picture or give more information. \u200b\u200b\u200b\u200b\u200b\u200b\u200b",
+      "image": {
+        "value": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8MjF8fGNvbnN1bHRpbmd8ZW58MHx8fHwxNzYxNjcyNTc5fDA&ixlib=rb-4.1.0&q=80&w=1080"
+      }
+    },
+    {
+      "title": "Image",
+      "subtitle": "Subtitle",
+      "description": "Describe the picture or give more information. \u200b\u200b\u200b\u200b\u200b\u200b\u200b",
+      "image": {
+        "value": "https://images.unsplash.com/photo-1557804506-669a67965ba0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8MjJ8fGNvbnN1bHRpbmd8ZW58MHx8fHwxNzYxNjcyNTc5fDA&ixlib=rb-4.1.0&q=80&w=1080"
+      }
+    }
+  ],
+  "image": {
+    "value": "https://images.unsplash.com/photo-1661856607957-32059f8428b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8MTJ8fGNvbnN1bHRpbmd8ZW58MHx8fHwxNzYxNjcyNTc5fDA&ixlib=rb-4.1.0&q=80&w=1080"
+  },
+  "title": "<font class=\"cstm-cl kv-ee-custom-text-cl4\">Indique a E-Lance para realizar o seu leil\u00e3o judicial</font>",
+  "description": "<font class=\"cstm-cl kv-ee-custom-text-cl4\">A E-Lance realiza leil\u00f5es judiciais com total seguran\u00e7a jur\u00eddica e suporte completo do in\u00edcio ao fim do processo.</font>",
+  "subtitle": "<font class=\"cstm-cl kv-ee-custom-text-cl4\" style=\"font-weight: normal;\">\u00c9 juiz, advogado ou trabalha em um escrit\u00f3rio de advocacia?</font>",
+  "_placeholders": {
+    "subtitle": "Do you have more to say and show? You can do it in this section. Add pictures and a short description to show visitors more of whatever it is you want.",
+    "description": "Add a description here."
+  },
+  "_toggle": {
+    "subtitle": true,
+    "title": true,
+    "description": true,
+    "buttons": false
+  },
+  "divider": false,
+  "contentAlignment": "kv-ee-align-left",
+  "sectionSize": "kv-ee-section--lg",
+  "opacity": "kv-ee-80",
+  "background": {
+    "colorIndex": 3,
+    "img": {
+      "source": "unsplash",
+      "noCdn": false,
+      "sizes": {
+        "150": "https://images.unsplash.com/photo-1508243529287-e21914733111?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8NTR8fGJ1c2luZXNzJTIwbWFufGVufDB8MHx8fDE3NjE3MzczMjJ8MA&ixlib=rb-4.1.0&q=90&w=150&utm_source=endurance-innovation&utm_medium=referral",
+        "400": "https://images.unsplash.com/photo-1508243529287-e21914733111?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8NTR8fGJ1c2luZXNzJTIwbWFufGVufDB8MHx8fDE3NjE3MzczMjJ8MA&ixlib=rb-4.1.0&q=90&w=400&utm_source=endurance-innovation&utm_medium=referral",
+        "1080": "https://images.unsplash.com/photo-1508243529287-e21914733111?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8NTR8fGJ1c2luZXNzJTIwbWFufGVufDB8MHx8fDE3NjE3MzczMjJ8MA&ixlib=rb-4.1.0&q=90&w=1080&utm_source=endurance-innovation&utm_medium=referral",
+        "2000": "https://images.unsplash.com/photo-1508243529287-e21914733111?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8NTR8fGJ1c2luZXNzJTIwbWFufGVufDB8MHx8fDE3NjE3MzczMjJ8MA&ixlib=rb-4.1.0&q=90&w=2000&utm_source=endurance-innovation&utm_medium=referral",
+        "4020": "https://images.unsplash.com/photo-1508243529287-e21914733111?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8NTR8fGJ1c2luZXNzJTIwbWFufGVufDB8MHx8fDE3NjE3MzczMjJ8MA&ixlib=rb-4.1.0&q=90&w=4020&utm_source=endurance-innovation&utm_medium=referral"
+      },
+      "contrastColor": 3
+    },
+    "divider": {
+      "type": "curveAsym",
+      "seed": 1,
+      "layers": 1,
+      "layerOffset": 25,
+      "dividerHeight": 100,
+      "randomizeLayers": true,
+      "flipX": false,
+      "flipY": false,
+      "active": false,
+      "overlap": 0
+    },
+    "userPickedImage": true
+  },
+  "fullPage": false
+}
+====================
+Category: text
+Title: Cuidamos de tudo
+Subtitle: <font class="cstm-cl kv-ee-custom-text-cl4" style="font-weight: normal;">Desde o acompanhamento jurídico, publicação do edital e comunicações às partes e terceiros até a condução e homologação do leilão.</font>
+Description: <font class="cstm-cl kv-ee-custom-text-cl4">Nossa equipe reúne leiloeiros oficiais, peritos e especialistas em avaliação, garantindo agilidade, transparência e resultados comprovados.<br><br>“Da avaliação ao arremate, a E-Lance cuida de todos os detalhes para que o leilão do seu processo seja um sucesso.”<br><br>Fazemos parcerias com diversos advogados.<br><br>Quer indicar a E-Lance para realizar seu leilão judicial?
+Baixe gratuitamente o modelo de petição pronto para protocolar no processo.</font>
+Debug Binding:
+{
+  "title": "Cuidamos de tudo",
+  "subtitle": "<font class=\"cstm-cl kv-ee-custom-text-cl4\" style=\"font-weight: normal;\">Desde o acompanhamento jur\u00eddico, publica\u00e7\u00e3o do edital e comunica\u00e7\u00f5es \u00e0s partes e terceiros at\u00e9 a condu\u00e7\u00e3o e homologa\u00e7\u00e3o do leil\u00e3o.</font>",
+  "description": "<font class=\"cstm-cl kv-ee-custom-text-cl4\">Nossa equipe re\u00fane leiloeiros oficiais, peritos e especialistas em avalia\u00e7\u00e3o, garantindo agilidade, transpar\u00eancia e resultados comprovados.<br><br>\u201cDa avalia\u00e7\u00e3o ao arremate, a E-Lance cuida de todos os detalhes para que o leil\u00e3o do seu processo seja um sucesso.\u201d<br><br>Fazemos parcerias com diversos advogados.<br><br>Quer indicar a E-Lance para realizar seu leil\u00e3o judicial?\nBaixe gratuitamente o modelo de peti\u00e7\u00e3o pronto para protocolar no processo.</font>",
+  "buttons": [
+    {
+      "href": "https://storage.googleapis.com/production-hostgator-brasil-v1-0-3/873/1757873/wOfpXRsp/68e6fed52e0443eeabebbb5b389cefd6?fileName=Peti\u00e7\u00e3o - Indica\u00e7\u00e3o da E-Lance Leil\u00f5es.docx",
+      "id": "01",
+      "linkType": "file",
+      "styles": {
+        "background": "",
+        "border": ""
+      },
+      "background": "",
+      "border": "",
+      "title": "Baixar modelo de peti\u00e7\u00e3o",
+      "buttonClass": "kv-ee-button-",
+      "colorClass": "primary",
+      "link": {
+        "href": "https://storage.googleapis.com/production-hostgator-brasil-v1-0-3/873/1757873/wOfpXRsp/68e6fed52e0443eeabebbb5b389cefd6?fileName=Peti\u00e7\u00e3o - Indica\u00e7\u00e3o da E-Lance Leil\u00f5es.docx"
+      },
+      "activeTab": -1
+    }
+  ],
+  "icon": {
+    "value": ""
+  },
+  "list": [
+    {
+      "title": "Add a title",
+      "description": "You can use this element to explain to visitors what you do or inform them about other subjects. For instance, what is your passion and why or what does your company offer, i.e. products and services. You can hide this element in the menu on the right",
+      "button": {
+        "href": "page:home",
+        "linkType": "page",
+        "styles": {
+          "background": "",
+          "border": ""
+        },
+        "background": "",
+        "border": "",
+        "title": "Read more"
+      }
+    },
+    {
+      "title": "Add a title",
+      "description": "You can use this element to explain to visitors what you do or inform them about other subjects. For instance, what is your passion and why or what does your company offer, i.e. products and services. You can hide this element in the menu on the right",
+      "button": {
+        "href": "page:home",
+        "linkType": "page",
+        "styles": {
+          "background": "",
+          "border": ""
+        },
+        "background": "",
+        "border": "",
+        "title": "Read more"
+      }
+    }
+  ],
+  "image": {
+    "value": "https://images.unsplash.com/photo-1431540015161-0bf868a2d407?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8MjR8fGNvbnN1bHRpbmd8ZW58MHx8fHwxNzYxNjcyNTc5fDA&ixlib=rb-4.1.0&q=80&w=1080"
+  },
+  "_placeholders": {
+    "subtitle": "Learn more about what we do",
+    "description": "You can edit text on your website by double clicking on a text box on your website. Alternatively, when you select a text box a settings menu will appear. Selecting 'Edit Text' from this menu will also allow you to edit the text within this text box. Remember to keep your wording friendly, approachable and easy to understand as if you were talking to your customer. You can edit text on your website by double clicking on a text box on your website. Alternatively, when you select a text box a settings menu will appear. Selecting 'Edit Text' from this menu will also allow you to edit the text within this text box. Remember to keep your wording friendly, approachable and easy to understand as if you were talking to your customer"
+  },
+  "_toggle": {
+    "title": true,
+    "subtitle": true,
+    "description": true,
+    "buttons": true
+  },
+  "sectionSize": "kv-ee-section--lg",
+  "contentAlignment": "kv-ee-align-left",
+  "background": {
+    "colorIndex": 0,
+    "divider": {
+      "type": "curveAsym",
+      "seed": 1,
+      "layers": 1,
+      "layerOffset": 25,
+      "dividerHeight": 100,
+      "randomizeLayers": true,
+      "flipX": false,
+      "flipY": false,
+      "active": false,
+      "overlap": 0
+    },
+    "sectionHeight": 558,
+    "sectionWidth": 1148,
+    "shouldRenderDivider": false,
+    "prevShouldRenderDivider": false
+  },
+  "fullPage": false
+}
+====================
+Category: contact
+Title: Fale com nossa equipe
+Subtitle: <font class="cstm-cl kv-ee-custom-text-cl4">Entre em contato e saiba como indicar seu processo para leilão judicial com a E-Lance.<br><br>Fone/Whats: (14) 98193-6781<br>E-mail: contato@elance.com.br<br>Ou preencha o formulário abaixo:</font>
+Description: Write something in this area.
+Debug Binding:
+{
+  "formData": {
+    "title": "Send us a message",
+    "namelabel": "Name",
+    "emaillabel": "Email Address",
+    "phonelabel": "Phone number",
+    "messagelabel": "Message",
+    "submitButton": {
+      "title": "Enviar Mensagem"
+    }
+  },
+  "formOptions": {
+    "fieldFirstName": {
+      "key": "firstName",
+      "toggle": true,
+      "translation": "Nome"
+    },
+    "fieldLastName": {
+      "key": "lastName",
+      "toggle": false,
+      "translation": "Last name"
+    },
+    "fieldSubject": {
+      "key": "subject",
+      "toggle": false,
+      "translation": "Email subject"
+    },
+    "fieldMessage": {
+      "key": "message",
+      "toggle": false,
+      "translation": "Your message"
+    },
+    "fieldEmail": {
+      "key": "email",
+      "toggle": true,
+      "translation": "E-mail"
+    },
+    "fieldPhone": {
+      "key": "phone",
+      "toggle": true,
+      "translation": "Telefone"
+    },
+    "fieldDate": {
+      "key": "date",
+      "toggle": false,
+      "translation": "Date field"
+    },
+    "fieldAddress": {
+      "key": "address",
+      "toggle": false,
+      "translation": "Your address"
+    },
+    "fieldSubscribe": {
+      "key": "subscribe",
+      "toggle": true,
+      "translation": "By checking this box and submitting your information, you are granting us permission to email you. You may unsubscribe at any time."
+    },
+    "successMessage": "Em breve entraremos em contato com mais informa\u00e7\u00f5es.",
+    "successTitle": "Mensagem enviada!",
+    "permissionMessage": "Gostaria de indicar a E-Lance para realizar leil\u00e3o judicial."
+  },
+  "image": {
+    "value": "https://images.unsplash.com/photo-1578574577315-3fbeb0cecdc2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NTEzfDB8MXxzZWFyY2h8Nnx8Y29uc3VsdGluZ3xlbnwwfHx8fDE3NjE2NzI1Nzl8MA&ixlib=rb-4.1.0&q=80&w=1080"
+  },
+  "description": "Write something in this area.",
+  "subtitle": "<font class=\"cstm-cl kv-ee-custom-text-cl4\">Entre em contato e saiba como indicar seu processo para leil\u00e3o judicial com a E-Lance.<br><br>Fone/Whats: (14) 98193-6781<br>E-mail: contato@elance.com.br<br>Ou preencha o formul\u00e1rio abaixo:</font>",
+  "title": "Fale com nossa equipe",
+  "_placeholders": {
+    "subtitle": "Get in touch",
+    "description": "Write something in this area."
+  },
+  "_toggle": {
+    "title": true,
+    "subtitle": true,
+    "description": false
+  },
+  "contentAlignment": "kv-ee-align-left",
+  "sectionSize": "kv-ee-section--lg",
+  "background": {
+    "colorIndex": 0,
+    "divider": {
+      "type": "curveAsym",
+      "seed": 1,
+      "layers": 1,
+      "layerOffset": 25,
+      "dividerHeight": 100,
+      "randomizeLayers": true,
+      "flipX": false,
+      "flipY": false,
+      "active": false,
+      "overlap": 0
+    },
+    "sectionHeight": 622,
+    "sectionWidth": 1148,
+    "shouldRenderDivider": false,
+    "prevShouldRenderDivider": false
+  },
+  "fullPage": false,
+  "sectionId": "1047",
+  "mainView": "contact",
+  "show": false,
+  "activeIndex": 3,
+  "xssIsProcessing": false,
+  "features": [
+    "form-submission"
+  ]
+}
+====================
