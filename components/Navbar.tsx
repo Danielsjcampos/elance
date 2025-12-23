@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown, Gavel, School, Globe, TrendingUp, ArrowRight, Briefcase } from 'lucide-react';
+import { Menu, X, ChevronDown, Gavel, School, Globe, TrendingUp, ArrowRight, Briefcase, User } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import { NAV_ITEMS } from '../constants';
 import { Logo } from './Logo';
 import { useModal } from '../contexts/ModalContext';
@@ -13,6 +14,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const { openModal } = useModal();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,7 +76,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled || isOpen ? 'glass-nav h-20' : 'bg-transparent h-24'}`}
+      className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled || isOpen ? 'bg-[#151d38]/90 backdrop-blur-md shadow-lg h-20' : 'bg-transparent h-24'}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
         <div className="flex justify-between items-center h-full">
@@ -130,6 +132,15 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                 )}
               </div>
             ))}
+
+            <Link
+              to="/admin/login"
+              className={`ml-4 px-4 py-2.5 rounded-full text-sm font-bold border transition-all duration-300 flex items-center gap-2
+              ${scrolled ? 'border-[#3a7ad1] text-[#3a7ad1] hover:bg-[#3a7ad1] hover:text-white' : 'border-white/50 text-white hover:bg-white/10'}`}
+            >
+              <User size={18} />
+              Portal do Franqueado
+            </Link>
 
             <a
               href="https://wa.me/5514998536254?text=Estou%20cansado%20de%20ser%20corretor%20da%20Caixa.%20Agora%20quero%20ser%20um%20leiloeiro.%20Pode%20me%20ajudar%3F"
@@ -190,7 +201,16 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
             ))}
           </div>
 
-          <div className="mt-auto pt-8">
+          <div className="mt-auto pt-8 space-y-4">
+            <Link
+              to="/admin/login"
+              onClick={() => setIsOpen(false)}
+              className="w-full flex items-center justify-center py-4 rounded-2xl border border-white/20 text-white font-bold text-lg hover:bg-white/5 transition-colors gap-2"
+            >
+              <User size={24} />
+              Portal do Franqueado
+            </Link>
+
             <a
               href="https://wa.me/5514998536254?text=Estou%20cansado%20de%20ser%20corretor%20da%20Caixa.%20Agora%20quero%20ser%20um%20leiloeiro.%20Pode%20me%20ajudar%3F"
               target="_blank"
