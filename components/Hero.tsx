@@ -73,6 +73,8 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
               <img
                 src="/hero-team.jpg"
                 alt="Modern Corporate Building"
+                width="800"
+                height="600"
                 className="w-full h-auto object-cover transform group-hover:scale-110 transition-transform duration-700"
               />
 

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { ModalProvider } from './contexts/ModalContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
+import GlobalSEO from './components/GlobalSEO';
 
 // Layouts
 import PublicLayout from './layouts/PublicLayout';
@@ -42,6 +43,8 @@ import BidInvest from './components/BidInvest';
 import Datajud from './pages/admin/Datajud';
 import Settings from './pages/admin/Settings';
 import AiAssistant from './pages/admin/AiAssistant';
+import MinimalLayout from './layouts/MinimalLayout';
+import LpElance from './pages/LpElance';
 
 function App() {
   return (
@@ -49,6 +52,7 @@ function App() {
       <ModalProvider>
         <AuthProvider>
           <ThemeProvider>
+            <GlobalSEO />
             <Router>
               <Routes>
                 {/* Public Routes */}
@@ -68,6 +72,10 @@ function App() {
                   <Route path="indique" element={<Indique />} />
                   <Route path="bid-invest" element={<BidInvest />} />
                   {/* Fallback for unknown routes inside public layout? Or global 404 */}
+                </Route>
+
+                <Route element={<MinimalLayout />}>
+                  <Route path="/lp-e-lance" element={<LpElance />} />
                 </Route>
 
                 {/* Admin Login */}

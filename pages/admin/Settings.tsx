@@ -9,6 +9,8 @@ import { Modal } from '../../components/Modal';
 interface FranchiseSettings {
     id: string;
     name: string;
+    site_title?: string;
+    featured_image_url?: string;
     cnpj: string;
     address: string;
     phone: string;
@@ -110,9 +112,9 @@ const Settings: React.FC = () => {
         }
     };
 
-    const [uploading, setUploading] = useState<'logo' | 'icon' | null>(null);
+    const [uploading, setUploading] = useState<'logo' | 'icon' | 'featured' | null>(null);
 
-    const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>, type: 'logo' | 'icon') => {
+    const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>, type: 'logo' | 'icon' | 'featured') => {
         try {
             setUploading(type);
 
@@ -141,8 +143,10 @@ const Settings: React.FC = () => {
 
             if (type === 'logo') {
                 setSettings({ ...settings, logo_url: publicUrl });
-            } else {
+            } else if (type === 'icon') {
                 setSettings({ ...settings, icon_url: publicUrl });
+            } else if (type === 'featured') {
+                setSettings({ ...settings, featured_image_url: publicUrl });
             }
 
         } catch (error: any) {
@@ -159,6 +163,8 @@ const Settings: React.FC = () => {
                 .from('franchise_units')
                 .update({
                     name: settings.name,
+                    site_title: settings.site_title,
+                    featured_image_url: settings.featured_image_url,
                     cnpj: settings.cnpj,
                     address: settings.address,
                     phone: settings.phone,
@@ -462,6 +468,15 @@ const Settings: React.FC = () => {
                                 />
                             </div>
                             <div>
+                                <label className="block text-sm font-bold text-gray-700 mb-1">Título do Site (SEO)</label>
+                                <input
+                                    className="w-full border rounded-lg p-2 outline-none"
+                                    placeholder="Ex: E-Lance | A melhor franquia..."
+                                    value={settings.site_title || ''}
+                                    onChange={e => setSettings({ ...settings, site_title: e.target.value })}
+                                />
+                            </div>
+                            <div>
                                 <label className="block text-sm font-bold text-gray-700 mb-1">CNPJ</label>
                                 <input
                                     className="w-full border rounded-lg p-2 outline-none"
@@ -484,6 +499,37 @@ const Settings: React.FC = () => {
                                     value={settings.email_contact || ''}
                                     onChange={e => setSettings({ ...settings, email_contact: e.target.value })}
                                 />
+                            </div>
+                        </div>
+
+                        {/* Featured Image Upload */}
+                        <div className="flex gap-6 items-start pt-4 border-t border-gray-100">
+                            <div className="w-48 h-28 bg-gray-100 rounded-lg flex items-center justify-center border border-dashed border-gray-300 overflow-hidden relative group">
+                                {settings.featured_image_url ? (
+                                    <img src={settings.featured_image_url} alt="Destaque" className="w-full h-full object-cover" />
+                                ) : (
+                                    <span className="text-gray-400 text-xs text-center px-2">Imagem Destaque</span>
+                                )}
+                                {uploading === 'featured' && (
+                                    <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+                                    </div>
+                                )}
+                            </div>
+                            <div className="flex-1 space-y-2">
+                                <label className="block text-sm font-bold text-gray-700">Imagem de Destaque (SEO/Social)</label>
+                                <p className="text-xs text-gray-500 mb-2">Imagem que aparece ao compartilhar o link. Recomendado: 1200x630px.</p>
+                                <label className="cursor-pointer inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                                    <Upload className="-ml-1 mr-2 h-5 w-5 text-gray-400" />
+                                    <span>Carregar Imagem</span>
+                                    <input
+                                        type="file"
+                                        className="sr-only"
+                                        accept="image/*"
+                                        onChange={(e) => handleFileUpload(e, 'featured')}
+                                        disabled={uploading !== null}
+                                    />
+                                </label>
                             </div>
                         </div>
 

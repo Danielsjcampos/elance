@@ -26,6 +26,8 @@ const About: React.FC = () => {
                 <img
                   src="https://img.youtube.com/vi/TuYQtX06ZMs/maxresdefault.jpg"
                   alt="Capa do Vídeo E-Lance"
+                  width="1280"
+                  height="720"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors flex items-center justify-center">

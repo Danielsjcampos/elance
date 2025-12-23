@@ -7,6 +7,8 @@ interface BrandingSettings {
     logo_url?: string;
     icon_url?: string;
     name?: string;
+    site_title?: string;
+    featured_image_url?: string;
 }
 
 interface ThemeContextType {
@@ -31,35 +33,40 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     const fetchBranding = async () => {
         try {
-            // Fetch the first franchise unit (assuming single site deployment or main unit)
+            // Fetch all franchise units to find the one with branding data
+            // (Assuming reasonably small number of units for now, or we should have a 'is_main' flag)
             const { data, error } = await supabase
                 .from('franchise_units')
-                .select('logo_url, icon_url, name')
-                .limit(1)
-                .single();
+                .select('logo_url, icon_url, name, site_title, featured_image_url, created_at');
 
-            if (data && !error) {
-                console.log('Branding fetched:', data);
-                setBranding(data);
+            if (data && !error && data.length > 0) {
+                // Prioritize unit with site_title or logo_url
+                // Fallback to the one named "Franquia de Leilões do Brasil" or similar if needed
+                // For now: Find first one with site_title OR logo_url
+                const mainUnit = data.find(u => u.site_title || u.logo_url) || data[0];
+
+                console.log('Branding fetched (selected):', mainUnit);
+                setBranding(mainUnit);
 
                 // Update Favicon dynamically
-                // Update Favicon dynamically
-                if (data.icon_url) {
+                if (mainUnit.icon_url) {
                     const existingLink = document.querySelector("link[rel*='icon']");
                     if (existingLink) {
-                        (existingLink as HTMLLinkElement).href = data.icon_url;
+                        (existingLink as HTMLLinkElement).href = mainUnit.icon_url;
                     } else {
                         const link = document.createElement('link');
                         link.type = 'image/x-icon';
                         link.rel = 'shortcut icon';
-                        link.href = data.icon_url;
+                        link.href = mainUnit.icon_url;
                         document.head.appendChild(link);
                     }
                 }
 
-                // Update Title if name exists
-                if (data.name) {
-                    document.title = data.name;
+                // Update Title: Prefer site_title, fallback to name
+                if (mainUnit.site_title) {
+                    document.title = mainUnit.site_title;
+                } else if (mainUnit.name) {
+                    document.title = mainUnit.name;
                 }
             }
         } catch (error) {
