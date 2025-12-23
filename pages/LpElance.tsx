@@ -32,13 +32,13 @@ const LpElance: React.FC = () => {
             <main>
                 <LpHero onStartQuiz={scrollToQuiz} />
 
+                <LpBio />
+                <LpFAQ />
+
                 {/* Scroll Target for Quiz */}
                 <div ref={quizRef}>
                     <QuizForm />
                 </div>
-
-                <LpBio />
-                <LpFAQ />
             </main>
 
             <footer className="bg-[#0b0f1e] py-8 text-center border-t border-white/5">
