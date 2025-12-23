@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
-import { Save, Building, Users, Shield, Check, X, Trash2, Edit, Palette, Mail, Send } from 'lucide-react';
+import { Save, Building, Users, Shield, Check, X, Trash2, Edit, Palette, Mail, Send, Upload } from 'lucide-react';
 import { sendEmail } from '../../services/emailService';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
@@ -14,6 +14,7 @@ interface FranchiseSettings {
     phone: string;
     email_contact: string;
     logo_url: string;
+    icon_url?: string;
     smtp_config: {
         host: string;
         port: string;
@@ -109,6 +110,48 @@ const Settings: React.FC = () => {
         }
     };
 
+    const [uploading, setUploading] = useState<'logo' | 'icon' | null>(null);
+
+    const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>, type: 'logo' | 'icon') => {
+        try {
+            setUploading(type);
+
+            if (!event.target.files || event.target.files.length === 0) {
+                throw new Error('Você deve selecionar uma imagem para upload.');
+            }
+
+            const file = event.target.files[0];
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${profile?.franchise_unit_id}/${type}_${Math.random()}.${fileExt}`;
+            const filePath = `${fileName}`;
+
+            let { error: uploadError } = await supabase.storage
+                .from('franchise-assets')
+                .upload(filePath, file);
+
+            if (uploadError) {
+                // Try upsert if exists? Or random name makes it unique. 
+                // But let's handle if bucket bucket doesn't exist? (Assuming we run migration)
+                throw uploadError;
+            }
+
+            const { data: { publicUrl } } = supabase.storage
+                .from('franchise-assets')
+                .getPublicUrl(filePath);
+
+            if (type === 'logo') {
+                setSettings({ ...settings, logo_url: publicUrl });
+            } else {
+                setSettings({ ...settings, icon_url: publicUrl });
+            }
+
+        } catch (error: any) {
+            alert('Erro no upload: ' + error.message);
+        } finally {
+            setUploading(null);
+        }
+    };
+
     const handleSaveSettings = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
@@ -121,6 +164,7 @@ const Settings: React.FC = () => {
                     phone: settings.phone,
                     email_contact: settings.email_contact,
                     logo_url: settings.logo_url,
+                    icon_url: settings.icon_url,
                     smtp_config: settings.smtp_config
                 })
                 .eq('id', profile?.franchise_unit_id);
@@ -344,24 +388,66 @@ const Settings: React.FC = () => {
             {activeTab === 'general' ? (
                 <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 max-w-3xl">
                     <form onSubmit={handleSaveSettings} className="space-y-6">
-                        <div className="flex gap-6 items-start">
-                            <div className="w-32 h-32 bg-gray-100 rounded-lg flex items-center justify-center border border-dashed border-gray-300 overflow-hidden relative group">
-                                {settings.logo_url ? (
-                                    <img src={settings.logo_url} alt="Logo" className="w-full h-full object-contain" />
-                                ) : (
-                                    <span className="text-gray-400 text-xs text-center px-2">Logo (URL)</span>
-                                )}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                            {/* Logo Upload */}
+                            <div className="flex gap-6 items-start">
+                                <div className="w-32 h-32 bg-gray-100 rounded-lg flex items-center justify-center border border-dashed border-gray-300 overflow-hidden relative group">
+                                    {settings.logo_url ? (
+                                        <img src={settings.logo_url} alt="Logo" className="w-full h-full object-contain" />
+                                    ) : (
+                                        <span className="text-gray-400 text-xs text-center px-2">Logo</span>
+                                    )}
+                                    {uploading === 'logo' && (
+                                        <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                                            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="flex-1 space-y-2">
+                                    <label className="block text-sm font-bold text-gray-700">Logo do Site</label>
+                                    <p className="text-xs text-gray-500 mb-2">Recomendado: 250x100px (PNG transparente)</p>
+                                    <label className="cursor-pointer inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                                        <Upload className="-ml-1 mr-2 h-5 w-5 text-gray-400" />
+                                        <span>Carregar Logo</span>
+                                        <input
+                                            type="file"
+                                            className="sr-only"
+                                            accept="image/*"
+                                            onChange={(e) => handleFileUpload(e, 'logo')}
+                                            disabled={uploading !== null}
+                                        />
+                                    </label>
+                                </div>
                             </div>
-                            <div className="flex-1 space-y-4">
-                                <div>
-                                    <label className="block text-sm font-bold text-gray-700 mb-1">URL da Logo</label>
-                                    <input
-                                        className="w-full border rounded-lg p-2 outline-none"
-                                        placeholder="https://..."
-                                        value={settings.logo_url || ''}
-                                        onChange={e => setSettings({ ...settings, logo_url: e.target.value })}
-                                    />
-                                    <p className="text-xs text-gray-400 mt-1">Cole o link direto da imagem da sua logo.</p>
+
+                            {/* Icon Upload */}
+                            <div className="flex gap-6 items-start">
+                                <div className="w-32 h-32 bg-gray-100 rounded-lg flex items-center justify-center border border-dashed border-gray-300 overflow-hidden relative group">
+                                    {settings.icon_url ? (
+                                        <img src={settings.icon_url} alt="Icone" className="w-full h-full object-contain" />
+                                    ) : (
+                                        <span className="text-gray-400 text-xs text-center px-2">Ícone</span>
+                                    )}
+                                    {uploading === 'icon' && (
+                                        <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                                            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="flex-1 space-y-2">
+                                    <label className="block text-sm font-bold text-gray-700">Ícone do Navegador (Favicon)</label>
+                                    <p className="text-xs text-gray-500 mb-2">Recomendado: 32x32px ou 64x64px (PNG/ICO)</p>
+                                    <label className="cursor-pointer inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                                        <Upload className="-ml-1 mr-2 h-5 w-5 text-gray-400" />
+                                        <span>Carregar Ícone</span>
+                                        <input
+                                            type="file"
+                                            className="sr-only"
+                                            accept="image/*"
+                                            onChange={(e) => handleFileUpload(e, 'icon')}
+                                            disabled={uploading !== null}
+                                        />
+                                    </label>
                                 </div>
                             </div>
                         </div>
