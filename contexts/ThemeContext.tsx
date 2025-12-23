@@ -39,15 +39,22 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
                 .single();
 
             if (data && !error) {
+                console.log('Branding fetched:', data);
                 setBranding(data);
 
                 // Update Favicon dynamically
+                // Update Favicon dynamically
                 if (data.icon_url) {
-                    const link: HTMLLinkElement | null = document.querySelector("link[rel*='icon']") || document.createElement('link');
-                    link.type = 'image/x-icon';
-                    link.rel = 'shortcut icon';
-                    link.href = data.icon_url;
-                    document.getElementsByTagName('head')[0].appendChild(link);
+                    const existingLink = document.querySelector("link[rel*='icon']");
+                    if (existingLink) {
+                        (existingLink as HTMLLinkElement).href = data.icon_url;
+                    } else {
+                        const link = document.createElement('link');
+                        link.type = 'image/x-icon';
+                        link.rel = 'shortcut icon';
+                        link.href = data.icon_url;
+                        document.head.appendChild(link);
+                    }
                 }
 
                 // Update Title if name exists
