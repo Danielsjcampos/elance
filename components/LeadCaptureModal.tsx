@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { X, ArrowRight, Check, MessageCircle, Mail, User } from 'lucide-react';
 import { useModal } from '../contexts/ModalContext';
 
+import { supabase } from '../lib/supabase';
+import { useTheme } from '../contexts/ThemeContext';
+
 const LeadCaptureModal: React.FC = () => {
     const { isOpen, closeModal, source } = useModal();
+    const { branding } = useTheme();
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         name: '',
@@ -25,7 +29,20 @@ const LeadCaptureModal: React.FC = () => {
         setIsSubmitting(true);
 
         try {
-            // Generate WhatsApp message based on source
+            // 1. Save Lead to CRM
+            if (branding?.id) {
+                await supabase.from('leads').insert([{
+                    franchise_id: branding.id,
+                    name: formData.name,
+                    phone: formData.whatsapp, // Mapping whatsapp to phone
+                    email: formData.email,
+                    status: 'new',
+                    source: source || 'Floating Widget',
+                    notes: 'Lead captured via WhatsApp Modal'
+                }]);
+            }
+
+            // 2. Generate WhatsApp message based on source
             let message = `Olá! Meu nome é ${formData.name}. Gostaria de saber mais sobre a E-lance.`;
 
             if (source) {
@@ -36,6 +53,13 @@ const LeadCaptureModal: React.FC = () => {
 
             // Encode message for URL
             const encodedMessage = encodeURIComponent(message);
+            // Use contact number from branding or fallback
+            // Assuming branding.phone exists or we have a context for it? 
+            // ThemeContext/BrandingSettings currently has basic info. 
+            // Let's stick to the existing hardcoded or a better configured one.
+            // For now, keeping the original hardcoded number or improving if possible.
+            // But wait, the original file had '5514998536254'. Ideally this should come from settings too.
+            // Let's use the hardcoded one for now to avoid breaking if settings are empty.
             const phoneNumber = '5514998536254';
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 

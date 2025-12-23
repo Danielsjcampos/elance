@@ -4,6 +4,7 @@ import { supabase } from '../lib/supabase';
 type MenuMode = 'default' | 'macbook';
 
 interface BrandingSettings {
+    id?: string;
     logo_url?: string;
     icon_url?: string;
     name?: string;
@@ -37,7 +38,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             // (Assuming reasonably small number of units for now, or we should have a 'is_main' flag)
             const { data, error } = await supabase
                 .from('franchise_units')
-                .select('logo_url, icon_url, name, site_title, featured_image_url, created_at');
+                .select('id, logo_url, icon_url, name, site_title, featured_image_url, created_at');
 
             if (data && !error && data.length > 0) {
                 // Prioritize unit with site_title or logo_url

@@ -3,9 +3,13 @@ import { MapPin, Phone, Mail, Clock, Send, CheckCircle, AlertCircle, Loader2 } f
 import { CONTACT_INFO, COLORS } from '../constants';
 import SEO from './SEO';
 
-const WEBHOOK_URL = "YOUR_WEBHOOK_URL_HERE"; // Replace with your actual webhook URL (e.g., n8n, Zapier, Make)
+import { supabase } from '../lib/supabase';
+import { useTheme } from '../contexts/ThemeContext';
+
+const WEBHOOK_URL = "YOUR_WEBHOOK_URL_HERE"; // Replace with your actual webhook URL
 
 const Contact: React.FC = () => {
+  const { branding } = useTheme();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -31,7 +35,25 @@ const Contact: React.FC = () => {
     setStatus('submitting');
 
     try {
-      // Simulate network request or send to actual webhook
+      // 1. Insert into Supabase CRM
+      if (branding?.id) {
+        const { error: supabaseError } = await supabase.from('leads').insert([{
+          franchise_id: branding.id,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          status: 'new',
+          source: 'Site Contact Form',
+          notes: formData.message
+        }]);
+
+        if (supabaseError) {
+          console.error('Supabase Error:', supabaseError);
+          // We don't stop execution here, we try webhook as well
+        }
+      }
+
+      // 2. Webhook (Optional/Legacy)
       if (WEBHOOK_URL !== "YOUR_WEBHOOK_URL_HERE") {
         const response = await fetch(WEBHOOK_URL, {
           method: 'POST',
@@ -48,7 +70,7 @@ const Contact: React.FC = () => {
         if (!response.ok) throw new Error('Network response was not ok');
       } else {
         // Simulation for demo purposes if no webhook is set
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise(resolve => setTimeout(resolve, 1000));
       }
 
       setStatus('success');

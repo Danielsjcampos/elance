@@ -1,3 +1,4 @@
+
 import React, { useRef } from 'react';
 import LpHero from '../components/lp/LpHero';
 import QuizForm from '../components/lp/QuizForm';
@@ -5,6 +6,8 @@ import LpBio from '../components/lp/LpBio';
 import LpFAQ from '../components/lp/LpFAQ';
 import LpSEO from '../components/lp/LpSEO';
 import { Logo } from '../components/Logo';
+import FloatingLeadButton from '../components/FloatingLeadButton';
+import LeadCaptureModal from '../components/LeadCaptureModal';
 
 const LpElance: React.FC = () => {
     const quizRef = useRef<HTMLDivElement>(null);
@@ -51,6 +54,9 @@ const LpElance: React.FC = () => {
                     </p>
                 </div>
             </footer>
+
+            <LeadCaptureModal />
+            <FloatingLeadButton />
         </div>
     );
 };
