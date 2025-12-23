@@ -1,37 +1,49 @@
 import { supabase } from '../lib/supabase';
 
-interface EmailConfig {
+interface SmtpConfig {
+    host: string;
+    port: string;
+    user: string;
+    pass: string;
+    secure: boolean;
+    sender_name: string;
+    sender_email: string;
+}
+
+interface EmailOptions {
     to: string;
     subject: string;
     html: string;
+    smtpConfig?: SmtpConfig;
 }
 
-export const sendEmail = async ({ to, subject, html }: EmailConfig) => {
+export const sendEmail = async ({ to, subject, html, smtpConfig }: EmailOptions) => {
     try {
-        // 1. Fetch SMTP settings from DB (franchise_units)
-        // We need the current user's franchise_id to fetch the correct settings.
-        // For simplicity, we'll fetch the profile then the unit.
-        // Optimization: Pass these down or cache them.
+        let config = smtpConfig;
 
-        const { data: { user } } = await supabase.auth.getUser();
-        if (!user) throw new Error('User not authenticated');
+        // If no config provided, fetch from DB
+        if (!config) {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (!user) throw new Error('User not authenticated');
 
-        const { data: profile } = await supabase
-            .from('profiles')
-            .select('franchise_unit_id')
-            .eq('id', user.id)
-            .single();
+            const { data: profile } = await supabase
+                .from('profiles')
+                .select('franchise_unit_id')
+                .eq('id', user.id)
+                .single();
 
-        if (!profile?.franchise_unit_id) throw new Error('Franchise not found');
+            if (!profile?.franchise_unit_id) throw new Error('Franchise not found');
 
-        const { data: franchise } = await supabase
-            .from('franchise_units')
-            .select('smtp_config')
-            .eq('id', profile.franchise_unit_id)
-            .single();
+            const { data: franchise } = await supabase
+                .from('franchise_units')
+                .select('smtp_config')
+                .eq('id', profile.franchise_unit_id)
+                .single();
 
-        if (!franchise?.smtp_config) {
-            throw new Error('SMTP Configuration not found. Please configure it in Settings.');
+            if (!franchise?.smtp_config) {
+                throw new Error('SMTP Configuration not found. Please configure it in Settings.');
+            }
+            config = franchise.smtp_config;
         }
 
         // 2. Call the backend API
@@ -44,7 +56,7 @@ export const sendEmail = async ({ to, subject, html }: EmailConfig) => {
                 to,
                 subject,
                 html,
-                config: franchise.smtp_config
+                config
             }),
         });
 

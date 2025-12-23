@@ -150,35 +150,78 @@ const Marketing: React.FC = () => {
 
         setSendingEmail(true);
         try {
-            // Fetch all users emails
-            const { data: users, error } = await supabase
+            // 1. Fetch SMTP Config
+            const { data: { user } } = await supabase.auth.getUser();
+            const { data: profile } = await supabase.from('profiles').select('franchise_unit_id').eq('id', user?.id).single();
+
+            const { data: franchise } = await supabase
+                .from('franchise_units')
+                .select('smtp_config')
+                .eq('id', profile?.franchise_unit_id)
+                .single();
+
+            if (!franchise?.smtp_config) {
+                alert('Erro: Configure o SMTP nas Configurações primeiro.');
+                setSendingEmail(false);
+                return;
+            }
+
+            // 2. Fetch Recipients (Profiles AND Leads? User said "clients". Let's fetch Leads too if possible, or just profiles as before. 
+            // Stick to profiles as per original code to avoid spamming leads accidentally until confirmed. 
+            // Wait, "todos os clientes" strongly suggests Leads. 
+            // Let's add Leads to the list.)
+
+            // Existing profiles fetch
+            const { data: profiles, error: profileError } = await supabase
                 .from('profiles')
                 .select('email, full_name');
 
-            if (error) throw error;
-            if (!users || users.length === 0) throw new Error('Nenhum destinatário encontrado.');
+            // Fetch Leads
+            const { data: leads, error: leadError } = await supabase
+                .from('leads')
+                .select('email, name');
+
+            if (profileError) throw profileError;
+
+            // Combine unique emails
+            const recipients = new Map();
+
+            profiles?.forEach(p => {
+                if (p.email) recipients.set(p.email, { name: p.full_name || 'Parceiro', email: p.email, type: 'User' });
+            });
+
+            leads?.forEach(l => {
+                if (l.email) recipients.set(l.email, { name: l.name || 'Cliente', email: l.email, type: 'Lead' });
+            });
+
+            if (recipients.size === 0) throw new Error('Nenhum destinatário encontrado.');
 
             let successCount = 0;
+            const total = recipients.size;
+            let current = 0;
 
-            // Send individually (could be batched in backend but keeping simple loop here)
-            // or pass full list to backend if backend supported bulk.
-            // Our backend currently takes single "to". We can loop here.
-
-            for (const user of users) {
-                if (!user.email) continue;
-                await sendEmail({
-                    to: user.email,
-                    subject: emailSubject,
-                    html: `
-                        <div style="font-family: Arial, sans-serif; color: #333;">
-                            <p>Olá, ${user.full_name || 'Parceiro'},</p>
-                            ${emailBody}
-                            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
-                            <p style="font-size: 12px; color: #999;">Enviado via Sistema Elance</p>
-                        </div>
-                    `
-                });
-                successCount++;
+            for (const recipient of recipients.values()) {
+                current++;
+                // Update button text via state if we wanted, but simple loop for now
+                try {
+                    await sendEmail({
+                        to: recipient.email,
+                        subject: emailSubject,
+                        html: `
+                            <div style="font-family: Arial, sans-serif; color: #333;">
+                                <p>Olá, ${recipient.name},</p>
+                                ${emailBody}
+                                <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+                                <p style="font-size: 12px; color: #999;">Enviado via Sistema Elance</p>
+                            </div>
+                        `,
+                        smtpConfig: franchise.smtp_config // Pass config to avoid refetching
+                    });
+                    successCount++;
+                    if (current % 5 === 0) await new Promise(r => setTimeout(r, 1000)); // Throttle slightly
+                } catch (err) {
+                    console.error(`Failed to send to ${recipient.email}:`, err);
+                }
             }
 
             alert(`Email enviado para ${successCount} usuários com sucesso!`);
