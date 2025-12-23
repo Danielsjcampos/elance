@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Play } from 'lucide-react';
 import SEO from './components/SEO';
 
 const Ecossistema = () => {
+    const [isPlaying, setIsPlaying] = useState(false);
     return (
         <div className="min-h-screen bg-slate-900 text-slate-100 font-sans pt-20">
             <SEO
@@ -23,16 +24,30 @@ const Ecossistema = () => {
                         </p>
                     </div>
 
-                    <div className="relative max-w-4xl mx-auto aspect-video rounded-2xl overflow-hidden shadow-2xl border border-slate-700 animate-fade-in-up delay-200 group">
-                        {/* YouTube Embed */}
-                        <iframe
-                            className="w-full h-full"
-                            src="https://www.youtube.com/embed/TuYQtX06ZMs?rel=0"
-                            title="O Ecossistema E-Lance"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                        ></iframe>
+                    <div className="relative max-w-4xl mx-auto aspect-video rounded-2xl overflow-hidden shadow-2xl border border-slate-700 animate-fade-in-up delay-200 group cursor-pointer" onClick={() => setIsPlaying(true)}>
+                        {!isPlaying ? (
+                            <>
+                                <img
+                                    src="https://img.youtube.com/vi/TuYQtX06ZMs/maxresdefault.jpg"
+                                    alt="Capa do Vídeo Ecossistema"
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                                />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <div className="w-20 h-20 bg-blue-600/90 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform animate-pulse">
+                                        <Play size={32} className="text-white fill-white ml-2" />
+                                    </div>
+                                </div>
+                            </>
+                        ) : (
+                            <iframe
+                                className="w-full h-full"
+                                src="https://www.youtube.com/embed/TuYQtX06ZMs?autoplay=1&rel=0"
+                                title="O Ecossistema E-Lance"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                            ></iframe>
+                        )}
                     </div>
                 </div>
             </section>

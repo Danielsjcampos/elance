@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
     <footer id="contact" className="bg-[#eff0f1] pt-20 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          
+
           {/* Brand Column */}
           <div className="space-y-6">
             <Logo className="h-10 opacity-90 filter grayscale hover:grayscale-0 transition-all duration-500" />
@@ -20,13 +20,13 @@ const Footer: React.FC = () => {
               Escola, Portal de Leilões e Franquia. A única franquia do Brasil para quem deseja atuar como Leiloeiro.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="p-2 bg-white rounded-full text-[#151d38] hover:bg-[#3a7ad1] hover:text-white transition-colors shadow-sm">
+              <a href="#" aria-label="Visite nosso Facebook" className="p-2 bg-white rounded-full text-[#151d38] hover:bg-[#3a7ad1] hover:text-white transition-colors shadow-sm">
                 <Facebook size={20} />
               </a>
-              <a href="#" className="p-2 bg-white rounded-full text-[#151d38] hover:bg-[#3a7ad1] hover:text-white transition-colors shadow-sm">
+              <a href="#" aria-label="Visite nosso Instagram" className="p-2 bg-white rounded-full text-[#151d38] hover:bg-[#3a7ad1] hover:text-white transition-colors shadow-sm">
                 <Instagram size={20} />
               </a>
-              <a href="#" className="p-2 bg-white rounded-full text-[#151d38] hover:bg-[#3a7ad1] hover:text-white transition-colors shadow-sm">
+              <a href="#" aria-label="Visite nosso LinkedIn" className="p-2 bg-white rounded-full text-[#151d38] hover:bg-[#3a7ad1] hover:text-white transition-colors shadow-sm">
                 <Linkedin size={20} />
               </a>
             </div>
@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
 
           {/* Links Column */}
           <div>
-            <h4 className="text-[#151d38] font-bold text-lg mb-6">Navegação</h4>
+            <h3 className="text-[#151d38] font-bold text-lg mb-6">Navegação</h3>
             <ul className="space-y-3">
               {NAV_ITEMS.map((item) => (
                 <li key={item.label}>
@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
 
           {/* Services Column */}
           <div>
-            <h4 className="text-[#151d38] font-bold text-lg mb-6">Serviços</h4>
+            <h3 className="text-[#151d38] font-bold text-lg mb-6">Serviços</h3>
             <ul className="space-y-3">
               <li><a href="#franchise" className="text-gray-600 hover:text-[#3a7ad1] transition-colors text-sm font-medium">Franquia</a></li>
               <li><a href="#school" className="text-gray-600 hover:text-[#3a7ad1] transition-colors text-sm font-medium">Escola E-Lance</a></li>
@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
 
           {/* Contact Column */}
           <div>
-            <h4 className="text-[#151d38] font-bold text-lg mb-6">Contato</h4>
+            <h3 className="text-[#151d38] font-bold text-lg mb-6">Contato</h3>
             <ul className="space-y-4">
               <li className="flex items-start">
                 <MapPin size={18} className="text-[#3a7ad1] mr-3 mt-1 flex-shrink-0" />
@@ -85,7 +85,7 @@ const Footer: React.FC = () => {
           <p className="text-gray-400 text-sm text-center md:text-left mb-4 md:mb-0">
             © {new Date().getFullYear()} E-lance. Todos os direitos reservados.
           </p>
-          <button 
+          <button
             onClick={scrollToTop}
             className="flex items-center text-gray-400 hover:text-white text-sm transition-colors group"
           >

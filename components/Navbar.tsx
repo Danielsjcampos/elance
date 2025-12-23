@@ -157,6 +157,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 rounded-lg text-white hover:bg-white/10 transition-colors focus:outline-none"
+              aria-label="Abrir menu de navegação"
             >
               {isOpen ? <X size={28} /> : <Menu size={28} />}
             </button>

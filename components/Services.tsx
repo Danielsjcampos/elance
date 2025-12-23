@@ -31,7 +31,7 @@ const Services: React.FC<ServicesProps> = ({ onNavigate }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16">
           <div className="max-w-2xl">
-            <span className="text-[#3a7ad1] font-semibold tracking-wider uppercase text-sm">Nossas Soluções</span>
+            <span className="text-[#2a5da8] font-semibold tracking-wider uppercase text-sm">Nossas Soluções</span>
             <h2 className="text-3xl md:text-4xl font-bold text-[#151d38] mt-2">
               Conheça nossos serviços
             </h2>

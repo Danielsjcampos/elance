@@ -2,6 +2,8 @@ import React from 'react';
 import { Layers, Zap, ShieldCheck, TrendingUp } from 'lucide-react';
 
 const About: React.FC = () => {
+  const [isPlaying, setIsPlaying] = React.useState(false);
+
   return (
     <section id="about" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,15 +20,30 @@ const About: React.FC = () => {
 
         {/* Institutional Video */}
         <div className="max-w-4xl mx-auto mb-16 rounded-2xl overflow-hidden shadow-2xl border border-gray-200">
-          <div className="relative aspect-video">
-            <iframe
-              className="w-full h-full"
-              src="https://www.youtube.com/embed/TuYQtX06ZMs?rel=0"
-              title="O Ecossistema E-Lance"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+          <div className="relative aspect-video group cursor-pointer" onClick={() => setIsPlaying(true)}>
+            {!isPlaying ? (
+              <>
+                <img
+                  src="https://img.youtube.com/vi/TuYQtX06ZMs/maxresdefault.jpg"
+                  alt="Capa do Vídeo E-Lance"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                  <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                    <div className="w-0 h-0 border-t-8 border-t-transparent border-l-[16px] border-l-[#3a7ad1] border-b-8 border-b-transparent ml-1"></div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <iframe
+                className="w-full h-full"
+                src="https://www.youtube.com/embed/TuYQtX06ZMs?autoplay=1&rel=0"
+                title="O Ecossistema E-Lance"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            )}
           </div>
         </div>
 
