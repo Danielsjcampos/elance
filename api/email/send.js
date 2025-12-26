@@ -67,6 +67,8 @@ export default async function handler(req, res) {
         const port = Number(config.port);
 
         // Create reusable transporter object using the default SMTP transport
+        // Create reusable transporter object using the default SMTP transport
+        // Implementando recomendações para melhor estabilidade em serverless
         let transporter = nodemailer.createTransport({
             host: host,
             port: port,
@@ -75,23 +77,24 @@ export default async function handler(req, res) {
                 user: config.user,
                 pass: config.pass,
             },
+            // Pooling ajuda a evitar handshakes repetidos e erros de conexão em alguns cenários
+            pool: true,
+            maxConnections: 1,
+            maxMessages: 5,
             tls: {
-                rejectUnauthorized: false,
-                ciphers: 'SSLv3' // Tenta compatibilidade máxima
-            },
-            // Aumenta timeouts e desabilita pooling para serverless
-            pool: false,
-            connectionTimeout: 10000, // 10s
-            greetingTimeout: 10000,
-            socketTimeout: 15000
+                rejectUnauthorized: false
+            }
         });
+
+        // Verificar conexão antes de enviar
+        await transporter.verify();
 
         // Send mail with defined transport object
         let info = await transporter.sendMail({
-            from: `"${config.sender_name}" <${config.sender_email}>`, // sender address
-            to: to, // list of receivers
-            subject: subject, // Subject line
-            html: html, // html body
+            from: `"${config.sender_name}" <${config.sender_email}>`,
+            to: to,
+            subject: subject,
+            html: html,
         });
 
         console.log("SMTP Message sent: %s", info.messageId);
