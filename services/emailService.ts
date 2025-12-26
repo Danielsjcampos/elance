@@ -8,8 +8,9 @@ interface SmtpConfig {
     secure: boolean;
     sender_name: string;
     sender_email: string;
-    provider?: 'smtp' | 'brevo';
+    provider?: 'smtp' | 'brevo' | 'php';
     brevo_key?: string;
+    php_url?: string;
 }
 
 interface EmailOptions {
@@ -62,9 +63,24 @@ export const sendEmail = async ({ to, subject, html, smtpConfig, contactId }: Em
             `;
         }
 
-        // 3. Call the backend API
-        // Em produção ou usando 'vercel dev', o path /api/email/send funciona nativamente
-        // localmente sem vercel cli, ele tentará o proxy configurado no vite.config.ts
+        // 3. Select Provider Logic
+        // Se for PHP Bridge, enviamos direto para a URL externa
+        if (config.provider === 'php' && config.php_url) {
+            console.log('Sending via PHP Bridge:', config.php_url);
+            const response = await fetch(config.php_url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ to, subject, html: finalHtml, config })
+            });
+
+            const result = await response.json();
+            if (!result.success) {
+                throw new Error('PHP Bridge Error: ' + (result.error || 'Unknown Error'));
+            }
+            return result;
+        }
+
+        // Caso padrão: Envia para nosso backend (SMTP Node ou Brevo)
         const response = await fetch('/api/email/send', {
             method: 'POST',
             headers: {

@@ -652,10 +652,87 @@ const Settings: React.FC = () => {
                                     </div>
                                     <div className="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-bold uppercase rounded">Recomendado</div>
                                 </label>
+
+                                <label className={`flex-1 p-4 rounded-xl border cursor-pointer transition-all flex items-center justify-between ${settings.smtp_config?.provider === 'php'
+                                        ? 'bg-white border-blue-500 shadow-sm ring-1 ring-blue-500'
+                                        : 'bg-white border-gray-200 hover:bg-gray-50'
+                                    }`}>
+                                    <div className="flex items-center gap-3">
+                                        <input
+                                            type="radio"
+                                            name="provider"
+                                            value="php"
+                                            className="w-4 h-4 text-blue-600"
+                                            checked={settings.smtp_config?.provider === 'php'}
+                                            onChange={() => setSettings({ ...settings, smtp_config: { ...settings.smtp_config, provider: 'php' } as any })}
+                                        />
+                                        <div>
+                                            <p className="font-bold text-gray-800">Bridge PHP</p>
+                                            <p className="text-xs text-gray-500">Usa script PHP no seu host (cPanel, etc)</p>
+                                        </div>
+                                    </div>
+                                </label>
                             </div>
                         </div>
 
-                        {settings.smtp_config?.provider === 'brevo' ? (
+                        {settings.smtp_config?.provider === 'php' ? (
+                            <div className="grid grid-cols-1 gap-6 animate-in fade-in slide-in-from-top-4">
+                                <div className="p-4 bg-yellow-50 rounded-lg text-sm text-yellow-800 border border-yellow-100">
+                                    <p className="font-bold mb-1">Como configurar:</p>
+                                    <ol className="list-decimal ml-4 space-y-1">
+                                        <li>Baixe o arquivo <b>send.php</b> e a pasta <b>src</b> (PHPMailer).</li>
+                                        <li>Faça upload para seu servidor (ex: public_html/api/).</li>
+                                        <li>Cole a URL completa abaixo (ex: https://meusite.com/api/send.php).</li>
+                                    </ol>
+                                </div>
+
+                                <div>
+                                    <label className="block text-sm font-bold text-gray-700 mb-1">URL do Script PHP</label>
+                                    <input
+                                        className="w-full border rounded-lg p-2 outline-none"
+                                        value={settings.smtp_config?.php_url || ''}
+                                        onChange={e => setSettings({ ...settings, smtp_config: { ...settings.smtp_config, php_url: e.target.value } as any })}
+                                        placeholder="https://seu-site.com.br/api/send.php"
+                                    />
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    {/* Reutiliza os campos de SMTP pois o PHP precisa deles */}
+                                    <div>
+                                        <label className="block text-sm font-bold text-gray-700 mb-1">Host SMTP</label>
+                                        <input
+                                            className="w-full border rounded-lg p-2 outline-none"
+                                            value={settings.smtp_config?.host || ''}
+                                            onChange={e => setSettings({ ...settings, smtp_config: { ...settings.smtp_config, host: e.target.value } as any })}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-bold text-gray-700 mb-1">Porta</label>
+                                        <input
+                                            className="w-full border rounded-lg p-2 outline-none"
+                                            value={settings.smtp_config?.port || ''}
+                                            onChange={e => setSettings({ ...settings, smtp_config: { ...settings.smtp_config, port: e.target.value } as any })}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-bold text-gray-700 mb-1">Usuário</label>
+                                        <input
+                                            className="w-full border rounded-lg p-2 outline-none"
+                                            value={settings.smtp_config?.user || ''}
+                                            onChange={e => setSettings({ ...settings, smtp_config: { ...settings.smtp_config, user: e.target.value } as any })}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-bold text-gray-700 mb-1">Senha</label>
+                                        <input
+                                            type="password"
+                                            className="w-full border rounded-lg p-2 outline-none"
+                                            value={settings.smtp_config?.pass || ''}
+                                            onChange={e => setSettings({ ...settings, smtp_config: { ...settings.smtp_config, pass: e.target.value } as any })}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        ) : settings.smtp_config?.provider === 'brevo' ? (
                             <div className="grid grid-cols-1 gap-6 animate-in fade-in slide-in-from-top-4">
                                 <div className="p-4 bg-blue-50 rounded-lg text-sm text-blue-800 border border-blue-100">
                                     <p className="font-bold mb-1">Como obter sua chave Brevo:</p>
