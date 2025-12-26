@@ -87,7 +87,9 @@ export const sendEmail = async ({ to, subject, html, smtpConfig, contactId }: Em
         }
 
         if (!response.ok) {
-            throw new Error(result.error || 'Falha ao enviar e-mail. Verifique se o servidor de e-mail está rodando.');
+            // Tenta extrair detalhes se existirem
+            const errorMsg = result.details || result.error || 'Erro desconhecido ao enviar.';
+            throw new Error(`Falha no envio (${response.status}): ${errorMsg}`);
         }
 
         return result;
