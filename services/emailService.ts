@@ -63,50 +63,39 @@ export const sendEmail = async ({ to, subject, html, smtpConfig, contactId }: Em
             `;
         }
 
-        // --- ENVIO VIA PHP BRIDGE (MÉTODO ÚNICO E OFICIAL) ---
+        // --- ENVIO NATIVO NODE.JS (SMTP ou Brevo) ---
+        // Em produção (Vercel) ou Local (node server/index.js), usamos esse endpoint.
 
-        let phpUrl = config.php_url;
+        console.log('Sending via Node.js Backend:', config.provider || 'smtp');
 
-        // Se não tiver URL configurada no objeto, tentar descobrir ou usar fallback
-        if (!phpUrl) {
-            throw new Error('CONFIG_ERROR: URL do PHP Bridge não configurada. Vá em Configurações > Email e defina a URL do script send.php.');
-        }
-
-        // Preparar payload para o PHP
-        const payload = {
-            to,
-            subject,
-            html: finalHtml,
-            config: {
-                host: config.host,
-                port: config.port,
-                user: config.user,
-                pass: config.pass,
-                sender_name: config.sender_name,
-                sender_email: config.sender_email
-            }
-        };
-
-        const response = await fetch(phpUrl, {
+        const response = await fetch('/api/email/send', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                to,
+                subject,
+                html: finalHtml,
+                config
+            }),
         });
 
-        // Tentar parsear resposta
-        const textResult = await response.text();
-        let jsonResult;
+        const text = await response.text();
+        let result;
         try {
-            jsonResult = JSON.parse(textResult);
+            result = text ? JSON.parse(text) : {};
         } catch (e) {
-            throw new Error(`PHP Error (Invalid JSON): ${textResult.substring(0, 200)}...`);
+            throw new Error(`Erro de resposta do servidor (não JSON): ${text.substring(0, 100)}`);
         }
 
-        if (!response.ok || !jsonResult.success) {
-            throw new Error(jsonResult.error || 'Erro desconhecido no PHP Bridge');
+        if (!response.ok) {
+            // Tenta extrair detalhes se existirem
+            const errorMsg = result.details || result.error || 'Erro desconhecido ao enviar.';
+            throw new Error(`Falha no envio (${response.status}): ${errorMsg}`);
         }
 
-        return jsonResult;
+        return result;
 
     } catch (error: any) {
         console.error('Email Service Error:', error);
