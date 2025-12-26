@@ -25,6 +25,8 @@ interface FranchiseSettings {
         secure: boolean;
         sender_name: string;
         sender_email: string;
+        provider?: 'smtp' | 'brevo';
+        brevo_key?: string;
     };
 }
 
@@ -565,8 +567,9 @@ const Settings: React.FC = () => {
                                     alert('Enviando...');
                                     await sendEmail({
                                         to: email,
-                                        subject: 'Teste de SMTP - Sistema Elance',
-                                        html: '<h1>Funcionou!</h1><p>Seu sistema de email está configurado corretamente.</p>'
+                                        subject: 'Teste de Envio ' + (settings.smtp_config?.provider === 'brevo' ? '(Brevo API)' : '(SMTP)'),
+                                        html: '<h1>Funcionou!</h1><p>Seu sistema de email está configurado corretamente.</p>',
+                                        smtpConfig: settings.smtp_config as any // Uses data from form
                                     });
                                     alert('Email enviado com sucesso!');
                                 } catch (error: any) {
@@ -580,39 +583,118 @@ const Settings: React.FC = () => {
                     </div>
 
                     <form onSubmit={handleSaveSettings} className="space-y-6">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="md:col-span-2 p-4 bg-blue-50 rounded-lg text-sm text-blue-800 border border-blue-100 mb-2">
-                                Para testar localmente, execute <code>node scripts/smtp_server.js</code> e configure:
-                                <br />Host: <b>localhost</b>, Porta: <b>2525</b>, Seguro: <b>Desativado</b>.
-                            </div>
+                        {/* Provider Selection */}
+                        <div className="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                            <label className="block text-sm font-bold text-gray-700 mb-3">Método de Envio</label>
+                            <div className="flex gap-4">
+                                <label className={`flex-1 p-4 rounded-xl border cursor-pointer transition-all flex items-center justify-between ${(settings.smtp_config?.provider || 'smtp') === 'smtp'
+                                    ? 'bg-white border-blue-500 shadow-sm ring-1 ring-blue-500'
+                                    : 'bg-white border-gray-200 hover:bg-gray-50'
+                                    }`}>
+                                    <div className="flex items-center gap-3">
+                                        <input
+                                            type="radio"
+                                            name="provider"
+                                            value="smtp"
+                                            className="w-4 h-4 text-blue-600"
+                                            checked={(settings.smtp_config?.provider || 'smtp') === 'smtp'}
+                                            onChange={() => setSettings({ ...settings, smtp_config: { ...settings.smtp_config, provider: 'smtp' } as any })}
+                                        />
+                                        <div>
+                                            <p className="font-bold text-gray-800">Servidor SMTP Próprio</p>
+                                            <p className="text-xs text-gray-500">Usa seu servidor de e-mail atual (ex: 2TimeWeb)</p>
+                                        </div>
+                                    </div>
+                                </label>
 
-                            <div>
-                                <label className="block text-sm font-bold text-gray-700 mb-1">Host SMTP</label>
-                                <input
-                                    className="w-full border rounded-lg p-2 outline-none"
-                                    value={settings.smtp_config?.host || ''}
-                                    onChange={e => setSettings({ ...settings, smtp_config: { ...settings.smtp_config, host: e.target.value } as any })}
-                                    placeholder="smtp.exemplo.com"
-                                />
+                                <label className={`flex-1 p-4 rounded-xl border cursor-pointer transition-all flex items-center justify-between ${settings.smtp_config?.provider === 'brevo'
+                                    ? 'bg-white border-blue-500 shadow-sm ring-1 ring-blue-500'
+                                    : 'bg-white border-gray-200 hover:bg-gray-50'
+                                    }`}>
+                                    <div className="flex items-center gap-3">
+                                        <input
+                                            type="radio"
+                                            name="provider"
+                                            value="brevo"
+                                            className="w-4 h-4 text-blue-600"
+                                            checked={settings.smtp_config?.provider === 'brevo'}
+                                            onChange={() => setSettings({ ...settings, smtp_config: { ...settings.smtp_config, provider: 'brevo' } as any })}
+                                        />
+                                        <div>
+                                            <p className="font-bold text-gray-800">API Brevo (Sendinblue)</p>
+                                            <p className="text-xs text-gray-500">Alta entregabilidade, ideal para marketing.</p>
+                                        </div>
+                                    </div>
+                                    <div className="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-bold uppercase rounded">Recomendado</div>
+                                </label>
                             </div>
-                            <div>
-                                <label className="block text-sm font-bold text-gray-700 mb-1">Porta</label>
-                                <input
-                                    className="w-full border rounded-lg p-2 outline-none"
-                                    value={settings.smtp_config?.port || ''}
-                                    onChange={e => setSettings({ ...settings, smtp_config: { ...settings.smtp_config, port: e.target.value } as any })}
-                                    placeholder="587"
-                                />
+                        </div>
+
+                        {settings.smtp_config?.provider === 'brevo' ? (
+                            <div className="grid grid-cols-1 gap-6 animate-in fade-in slide-in-from-top-4">
+                                <div className="p-4 bg-blue-50 rounded-lg text-sm text-blue-800 border border-blue-100">
+                                    <p className="font-bold mb-1">Como obter sua chave Brevo:</p>
+                                    <ol className="list-decimal ml-4 space-y-1">
+                                        <li>Acesse sua conta no <a href="https://app.brevo.com" target="_blank" className="underline">Brevo.com</a></li>
+                                        <li>Vá em <b>SMTP & API</b> no menu superior direito.</li>
+                                        <li>Gere uma nova chave API v3 e cole abaixo.</li>
+                                    </ol>
+                                </div>
+
+                                <div>
+                                    <label className="block text-sm font-bold text-gray-700 mb-1">Chave de API (v3)</label>
+                                    <input
+                                        type="password"
+                                        className="w-full border rounded-lg p-2 outline-none font-mono text-sm"
+                                        value={settings.smtp_config?.brevo_key || ''}
+                                        onChange={e => setSettings({ ...settings, smtp_config: { ...settings.smtp_config, brevo_key: e.target.value } as any })}
+                                        placeholder="xkeysib-..."
+                                    />
+                                </div>
                             </div>
-                            <div>
-                                <label className="block text-sm font-bold text-gray-700 mb-1">Usuário</label>
-                                <input
-                                    className="w-full border rounded-lg p-2 outline-none"
-                                    value={settings.smtp_config?.user || ''}
-                                    onChange={e => setSettings({ ...settings, smtp_config: { ...settings.smtp_config, user: e.target.value } as any })}
-                                    placeholder="user@exemplo.com"
-                                />
+                        ) : (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in slide-in-from-top-4">
+                                <div className="md:col-span-2 p-4 bg-gray-50 rounded-lg text-sm text-gray-800 border border-gray-200 mb-2">
+                                    <p className="font-bold mb-1">Configurações Recomendadas (2TimeWeb):</p>
+                                    <ul className="list-disc ml-4 space-y-1">
+                                        <li><b>Host:</b> 2timeweb.com.br (ou mail.2timeweb.com.br se o DNS propagar)</li>
+                                        <li><b>SSL/TLS:</b> Porta 465 (Seguro: Ativado)</li>
+                                        <li><b>SMTP:</b> Porta 587 (Seguro: Desativado/STARTTLS)</li>
+                                        <li><b>Usuário:</b> elance@2timeweb.com.br</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <label className="block text-sm font-bold text-gray-700 mb-1">Host SMTP</label>
+                                    <input
+                                        className="w-full border rounded-lg p-2 outline-none"
+                                        value={settings.smtp_config?.host || ''}
+                                        onChange={e => setSettings({ ...settings, smtp_config: { ...settings.smtp_config, host: e.target.value } as any })}
+                                        placeholder="mail.2timeweb.com.br"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-bold text-gray-700 mb-1">Porta</label>
+                                    <input
+                                        className="w-full border rounded-lg p-2 outline-none"
+                                        value={settings.smtp_config?.port || ''}
+                                        onChange={e => setSettings({ ...settings, smtp_config: { ...settings.smtp_config, port: e.target.value } as any })}
+                                        placeholder="465 ou 587"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-bold text-gray-700 mb-1">Usuário / E-mail</label>
+                                    <input
+                                        className="w-full border rounded-lg p-2 outline-none"
+                                        value={settings.smtp_config?.user || ''}
+                                        onChange={e => setSettings({ ...settings, smtp_config: { ...settings.smtp_config, user: e.target.value } as any })}
+                                        placeholder="elance@2timeweb.com.br"
+                                    />
+                                </div>
                             </div>
+                        )}
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label className="block text-sm font-bold text-gray-700 mb-1">Senha</label>
                                 <input
@@ -620,7 +702,7 @@ const Settings: React.FC = () => {
                                     type="password"
                                     value={settings.smtp_config?.pass || ''}
                                     onChange={e => setSettings({ ...settings, smtp_config: { ...settings.smtp_config, pass: e.target.value } as any })}
-                                    placeholder="******"
+                                    placeholder="Use a senha da conta de email"
                                 />
                             </div>
                             <div>
@@ -629,7 +711,7 @@ const Settings: React.FC = () => {
                                     className="w-full border rounded-lg p-2 outline-none"
                                     value={settings.smtp_config?.sender_name || ''}
                                     onChange={e => setSettings({ ...settings, smtp_config: { ...settings.smtp_config, sender_name: e.target.value } as any })}
-                                    placeholder="Sua Empresa"
+                                    placeholder="Ex: E-Lance Portal"
                                 />
                             </div>
                             <div>
@@ -638,7 +720,7 @@ const Settings: React.FC = () => {
                                     className="w-full border rounded-lg p-2 outline-none"
                                     value={settings.smtp_config?.sender_email || ''}
                                     onChange={e => setSettings({ ...settings, smtp_config: { ...settings.smtp_config, sender_email: e.target.value } as any })}
-                                    placeholder="no-reply@suaempresa.com"
+                                    placeholder="elance@2timeweb.com.br"
                                 />
                             </div>
                             <div className="flex items-center gap-3">
@@ -649,7 +731,7 @@ const Settings: React.FC = () => {
                                     checked={settings.smtp_config?.secure || false}
                                     onChange={e => setSettings({ ...settings, smtp_config: { ...settings.smtp_config, secure: e.target.checked } as any })}
                                 />
-                                <label htmlFor="secureSmtp" className="text-sm font-bold text-gray-700 cursor-pointer">Usar conexão segura (SSL/TLS)</label>
+                                <label htmlFor="secureSmtp" className="text-sm font-bold text-gray-700 cursor-pointer">Usar conexão segura (SSL/TLS - Porta 465)</label>
                             </div>
                         </div>
 

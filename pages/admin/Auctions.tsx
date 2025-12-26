@@ -106,6 +106,9 @@ const Auctions: React.FC = () => {
                 // Trigger initial tasks for 'triagem' on create
                 if (newAuction) {
                     await triggerAutomation('triagem', newAuction.id);
+                    if (newAuction.status === 'published') {
+                        await triggerEmailAuction(newAuction);
+                    }
                 }
             }
 
@@ -312,6 +315,53 @@ const Auctions: React.FC = () => {
             setIsSaleModalOpen(false);
         } catch (error: any) {
             alert('Erro ao registrar venda: ' + error.message);
+        }
+    };
+
+    const triggerEmailAuction = async (auction: any) => {
+        try {
+            // 1. Fetch Recipients
+            const { data: contacts } = await supabase.from('email_contacts').select('id').eq('status', 'ativo');
+            if (!contacts || contacts.length === 0) return;
+
+            // 2. Create Template
+            const { data: template } = await supabase.from('email_templates').insert({
+                nome_template: `Novo Leilão: ${auction.title.substring(0, 30)}...`,
+                tipo: 'leilao',
+                assunto: `[Oportunidade] Novo Leilão: ${auction.title}`,
+                corpo_html: `
+                    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                        <h2 style="color: #3a7ad1;">{{titulo}}</h2>
+                        <p>{{descricao}}</p>
+                        <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                            <p><strong>Valor Avaliação:</strong> {{valor_avaliacao}}</p>
+                            <p><strong>Lance Mínimo:</strong> {{lance_minimo}}</p>
+                            <p><strong>1ª Praça:</strong> {{data_1}}</p>
+                            <p><strong>2ª Praça:</strong> {{data_2}}</p>
+                        </div>
+                        <a href="https://elance.com.br/leilao/{{id}}" style="display:inline-block; padding: 10px 20px; background: #3a7ad1; color: white; text-decoration: none; border-radius: 5px;">Ver mais detalhes</a>
+                    </div>
+                `,
+                variaveis: ['titulo', 'descricao', 'valor_avaliacao', 'lance_minimo', 'data_1', 'data_2', 'id']
+            }).select().single();
+
+            if (!template) return;
+
+            // 3. Add to Queue
+            const queueItems = contacts.map(c => ({
+                contato_id: c.id,
+                template_id: template.id,
+                status: 'pendente',
+                scheduled_for: new Date().toISOString()
+            }));
+
+            for (let i = 0; i < queueItems.length; i += 100) {
+                await supabase.from('email_queue').insert(queueItems.slice(i, i + 100));
+            }
+            console.log(`✅ Adicionado à fila de e-mail para ${queueItems.length} contatos.`);
+
+        } catch (err) {
+            console.error('Error triggering auction email:', err);
         }
     };
 

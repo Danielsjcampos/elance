@@ -13,15 +13,48 @@ app.post('/api/email/send', async (req, res) => {
     try {
         const { to, subject, html, config } = req.body;
 
+        // --- BREVO HANDLING ---
+        if (config && config.provider === 'brevo') {
+            if (!config.brevo_key) return res.status(400).json({ error: 'Missing Brevo API Key' });
+
+            const brevoResponse = await fetch('https://api.brevo.com/v3/smtp/email', {
+                method: 'POST',
+                headers: {
+                    'accept': 'application/json',
+                    'api-key': config.brevo_key,
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    sender: {
+                        name: config.sender_name || 'System',
+                        email: config.sender_email || 'noreply@tudosobreleilao.com'
+                    },
+                    to: [{ email: to }],
+                    subject: subject,
+                    htmlContent: html
+                })
+            });
+            const data = await brevoResponse.json();
+            if (!brevoResponse.ok) throw new Error(data.message || 'Brevo Error');
+
+            console.log('Brevo Message Sent:', data.messageId);
+            return res.json({ success: true, messageId: data.messageId });
+        }
+
+        // --- SMTP HANDLING ---
         if (!config || !config.host || !config.port) {
             return res.status(400).json({ error: 'Missing SMTP configuration' });
         }
 
+        const host = config.host.trim();
+        const port = parseInt(config.port);
+        console.log(`Connecting to SMTP: ${host}:${port} (user: ${config.user})`);
+
         // Create transporter
         const transporter = nodemailer.createTransport({
-            host: config.host,
-            port: parseInt(config.port),
-            secure: config.secure || false, // true for 465, false for other ports
+            host: host,
+            port: port,
+            secure: config.secure === undefined ? port === 465 : config.secure, // Auto-detect secure for 465
             auth: config.user ? {
                 user: config.user,
                 pass: config.pass,

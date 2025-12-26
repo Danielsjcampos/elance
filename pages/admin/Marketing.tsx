@@ -399,7 +399,13 @@ const Marketing: React.FC = () => {
                             <span>O email será enviado para <b>todos os usuários</b> cadastrados na sua unidade.</span>
                         </div>
 
-                        <div className="flex justify-end pt-4 border-t">
+                        <div className="flex justify-end pt-4 border-t gap-3">
+                            <a
+                                href="/admin/email-marketing"
+                                className="px-6 py-2 bg-gray-100 text-gray-700 rounded-lg font-bold hover:bg-gray-200 flex items-center gap-2"
+                            >
+                                <Layout size={18} /> Ver Central de Fluxos
+                            </a>
                             <button
                                 type="submit"
                                 disabled={sendingEmail}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
-import { LayoutDashboard, Users, Gavel, Building2, LogOut, School, FileText, Calendar, DollarSign, Scale, User, X, Lock, Mail, UserCircle, Save, CheckSquare, GraduationCap, Megaphone, Settings, Bot } from 'lucide-react';
+import { LayoutDashboard, Users, Gavel, Building2, LogOut, School, FileText, Calendar, DollarSign, Scale, User, X, Lock, Mail, UserCircle, Save, CheckSquare, GraduationCap, Megaphone, Settings, Bot, Newspaper, Contact } from 'lucide-react';
 import NotificationBell from '../components/NotificationBell';
 
 import { useTheme } from '../contexts/ThemeContext';
@@ -47,8 +47,10 @@ const AdminLayout: React.FC = () => {
     // Sidebar items config
     const menuItems = [
         { label: 'Dashboard', icon: LayoutDashboard, path: '/admin/dashboard', key: 'dashboard' },
+        { label: 'Notícias (Blog)', icon: Newspaper, path: '/admin/news', key: 'news' },
         { label: 'Franquias', icon: Building2, path: '/admin/franquias', key: 'franchises' },
         { label: 'Leads (Kanban)', icon: Users, path: '/admin/leads', key: 'leads' },
+        { label: 'Base de Clientes', icon: Contact, path: '/admin/clients', key: 'clients' },
         { label: 'Leilões', icon: Gavel, path: '/admin/leiloes', key: 'auctions' },
         { label: 'Tarefas', icon: CheckSquare, path: '/admin/tarefas', key: 'tasks' },
         { label: 'Treinamento', icon: GraduationCap, path: '/admin/treinamento', key: 'training' },
@@ -58,6 +60,7 @@ const AdminLayout: React.FC = () => {
         { label: 'Financeiro', icon: DollarSign, path: '/admin/financeiro', key: 'finance' },
         { label: 'Jurídico (Datajud)', icon: Scale, path: '/admin/datajud', key: 'datajud' },
         { label: 'I.A. Jurídica', icon: Bot, path: '/admin/ia-juridica', key: 'ai_assistant' },
+        { label: 'E-mail & Fluxos', icon: Mail, path: '/admin/email-marketing', key: 'marketing' },
         { label: 'Configurações', icon: Settings, path: '/admin/settings', key: 'settings' },
     ];
     const isActive = (path: string) => location.pathname.includes(path);

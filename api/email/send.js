@@ -27,17 +27,56 @@ export default async function handler(req, res) {
     }
 
     try {
+        // --- ENVIO VIA BREVO (API) ---
+        if (config.provider === 'brevo') {
+            if (!config.brevo_key) {
+                return res.status(400).json({ error: 'Chave API da Brevo não configurada.' });
+            }
+
+            const brevoResponse = await fetch('https://api.brevo.com/v3/smtp/email', {
+                method: 'POST',
+                headers: {
+                    'accept': 'application/json',
+                    'api-key': config.brevo_key,
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    sender: {
+                        name: config.sender_name || 'Elance System',
+                        email: config.sender_email || 'nao-responda@seudominio.com'
+                    },
+                    to: [{ email: to }],
+                    subject: subject,
+                    htmlContent: html
+                })
+            });
+
+            const brevoData = await brevoResponse.json();
+
+            if (!brevoResponse.ok) {
+                console.error('Brevo Error:', brevoData);
+                throw new Error(brevoData.message || 'Erro ao enviar via Brevo');
+            }
+
+            console.log("Brevo Message sent: %s", brevoData.messageId);
+            return res.status(200).json({ success: true, messageId: brevoData.messageId, provider: 'brevo' });
+        }
+
+        // --- ENVIO VIA SMTP (PADRÃO) ---
+        const host = config.host ? config.host.trim() : '';
+        const port = Number(config.port);
+
         // Create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
-            host: config.host,
-            port: Number(config.port),
-            secure: config.secure, // true for 465, false for other ports
+            host: host,
+            port: port,
+            secure: config.secure === undefined ? port === 465 : config.secure, // Auto-detect secure for 465
             auth: {
                 user: config.user,
                 pass: config.pass,
             },
             tls: {
-                rejectUnauthorized: false // Helps with self-signed certs or some hosting issues, though less secure ideally
+                rejectUnauthorized: false
             }
         });
 
@@ -49,11 +88,11 @@ export default async function handler(req, res) {
             html: html, // html body
         });
 
-        console.log("Message sent: %s", info.messageId);
-        return res.status(200).json({ success: true, messageId: info.messageId });
+        console.log("SMTP Message sent: %s", info.messageId);
+        return res.status(200).json({ success: true, messageId: info.messageId, provider: 'smtp' });
 
     } catch (error) {
-        console.error('SMTP Error:', error);
+        console.error('Email Send Error:', error);
         return res.status(500).json({ error: 'Failed to send email', details: error.message });
     }
 }

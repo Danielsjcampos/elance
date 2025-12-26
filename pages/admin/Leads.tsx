@@ -3,6 +3,8 @@ import { supabase } from '../../lib/supabase';
 import { Plus, Trash2, Edit, Search, Filter, LayoutGrid, List as ListIcon, User, Tag, Phone, Mail, MoreVertical } from 'lucide-react';
 import { Modal } from '../../components/Modal';
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
+import { useAuth } from '../../contexts/AuthContext';
+import { emailFlowService } from '../../services/emailFlowService';
 
 // --- Types ---
 interface Lead {
@@ -35,6 +37,7 @@ const COLUMNS = {
 const AVAILABLE_TAGS = ['Landing Page', 'WhatsApp', 'Instagram', 'Indicação', 'Advogado', 'Credenciados'];
 
 const Leads: React.FC = () => {
+    const { profile } = useAuth();
     const [leads, setLeads] = useState<Lead[]>([]);
     const [profiles, setProfiles] = useState<Profile[]>([]); // For assignment
     const [loading, setLoading] = useState(true);
@@ -99,6 +102,21 @@ const Leads: React.FC = () => {
             }
 
             setIsModalOpen(false);
+
+            // Mirror to Email Marketing Contacts
+            try {
+                await emailFlowService.syncContact({
+                    email: leadData.email,
+                    nome: leadData.name,
+                    telefone: leadData.phone,
+                    origem: leadData.source || 'leads_module',
+                    interesses: leadData.tags || [],
+                    franchise_unit_id: profile?.franchise_unit_id
+                });
+            } catch (err) {
+                console.error('Failed to sync lead to email_contacts:', err);
+            }
+
             fetchLeads();
         } catch (error: any) {
             alert('Erro ao salvar lead: ' + error.message);

@@ -8,6 +8,8 @@ interface SmtpConfig {
     secure: boolean;
     sender_name: string;
     sender_email: string;
+    provider?: 'smtp' | 'brevo';
+    brevo_key?: string;
 }
 
 interface EmailOptions {
@@ -15,9 +17,10 @@ interface EmailOptions {
     subject: string;
     html: string;
     smtpConfig?: SmtpConfig;
+    contactId?: string;
 }
 
-export const sendEmail = async ({ to, subject, html, smtpConfig }: EmailOptions) => {
+export const sendEmail = async ({ to, subject, html, smtpConfig, contactId }: EmailOptions) => {
     try {
         let config = smtpConfig;
 
@@ -46,7 +49,22 @@ export const sendEmail = async ({ to, subject, html, smtpConfig }: EmailOptions)
             config = franchise.smtp_config;
         }
 
-        // 2. Call the backend API
+        // 2. Add Unsubscribe Footer if not present
+        const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
+        let finalHtml = html;
+        if (baseUrl && !html.includes('api/email/unsubscribe')) {
+            const unsubUrl = `${baseUrl}/api/email/unsubscribe${contactId ? `?contactId=${contactId}` : ''}`;
+            finalHtml += `
+                <div style="font-size: 11px; color: #999; margin-top: 40px; text-align: center; border-top: 1px solid #eee; padding-top: 20px; font-family: sans-serif;">
+                    <p>Este e-mail foi enviado por E-Lance.</p>
+                    <p>Para não receber mais este tipo de conteúdo, <a href="${unsubUrl}" style="color: #3a7ad1; text-decoration: underline;">clique aqui para se descadastrar</a>.</p>
+                </div>
+            `;
+        }
+
+        // 3. Call the backend API
+        // Em produção ou usando 'vercel dev', o path /api/email/send funciona nativamente
+        // localmente sem vercel cli, ele tentará o proxy configurado no vite.config.ts
         const response = await fetch('/api/email/send', {
             method: 'POST',
             headers: {
@@ -55,15 +73,21 @@ export const sendEmail = async ({ to, subject, html, smtpConfig }: EmailOptions)
             body: JSON.stringify({
                 to,
                 subject,
-                html,
+                html: finalHtml,
                 config
             }),
         });
 
-        const result = await response.json();
+        let result;
+        const text = await response.text();
+        try {
+            result = text ? JSON.parse(text) : {};
+        } catch (e) {
+            throw new Error(`Erro de resposta do servidor (não JSON): ${text.substring(0, 100)}`);
+        }
 
         if (!response.ok) {
-            throw new Error(result.error || 'Failed to send email');
+            throw new Error(result.error || 'Falha ao enviar e-mail. Verifique se o servidor de e-mail está rodando.');
         }
 
         return result;
