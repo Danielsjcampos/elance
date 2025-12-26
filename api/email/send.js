@@ -70,14 +70,20 @@ export default async function handler(req, res) {
         let transporter = nodemailer.createTransport({
             host: host,
             port: port,
-            secure: config.secure === undefined ? port === 465 : config.secure, // Auto-detect secure for 465
+            secure: config.secure === undefined ? port === 465 : config.secure,
             auth: {
                 user: config.user,
                 pass: config.pass,
             },
             tls: {
-                rejectUnauthorized: false
-            }
+                rejectUnauthorized: false,
+                ciphers: 'SSLv3' // Tenta compatibilidade máxima
+            },
+            // Aumenta timeouts e desabilita pooling para serverless
+            pool: false,
+            connectionTimeout: 10000, // 10s
+            greetingTimeout: 10000,
+            socketTimeout: 15000
         });
 
         // Send mail with defined transport object

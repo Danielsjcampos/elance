@@ -43,6 +43,7 @@ const Settings: React.FC = () => {
     const { menuMode, setMenuMode } = useTheme();
     const [activeTab, setActiveTab] = useState<'general' | 'team' | 'appearance' | 'email'>('general');
     const [loading, setLoading] = useState(true);
+    const [testLog, setTestLog] = useState<string[]>([]); // Log visual para debug
 
     // General Settings State
     const [settings, setSettings] = useState<Partial<FranchiseSettings>>({});
@@ -563,17 +564,29 @@ const Settings: React.FC = () => {
                             onClick={async () => {
                                 const email = prompt('Digite o email de destino para o teste:');
                                 if (!email) return;
+
+                                setTestLog([`➡️ Iniciando teste para: ${email}`]);
+
                                 try {
-                                    alert('Enviando...');
+                                    setTestLog(prev => [...prev, '📦 Preparando configuração...', JSON.stringify({
+                                        provider: settings.smtp_config?.provider,
+                                        host: settings.smtp_config?.host,
+                                        port: settings.smtp_config?.port,
+                                        secure: settings.smtp_config?.secure
+                                    })]);
+
                                     await sendEmail({
                                         to: email,
                                         subject: 'Teste de Envio ' + (settings.smtp_config?.provider === 'brevo' ? '(Brevo API)' : '(SMTP)'),
                                         html: '<h1>Funcionou!</h1><p>Seu sistema de email está configurado corretamente.</p>',
-                                        smtpConfig: settings.smtp_config as any // Uses data from form
+                                        smtpConfig: settings.smtp_config as any
                                     });
+
+                                    setTestLog(prev => [...prev, '✅ Sucesso! Email entregue ao provedor.']);
                                     alert('Email enviado com sucesso!');
                                 } catch (error: any) {
-                                    alert('Erro ao enviar: ' + error.message);
+                                    setTestLog(prev => [...prev, `❌ ERRO FATAL: ${error.message}`]);
+                                    alert('Erro ao enviar (veja o log detalhado)');
                                 }
                             }}
                             className="text-[#3a7ad1] border border-[#3a7ad1] px-4 py-2 rounded-lg text-sm font-bold hover:bg-blue-50 flex items-center gap-2"
@@ -581,6 +594,18 @@ const Settings: React.FC = () => {
                             <Send size={16} /> Testar Envio
                         </button>
                     </div>
+                    {testLog.length > 0 && (
+                        <div className="mb-6 p-4 bg-gray-900 rounded-lg border border-gray-700 max-h-60 overflow-y-auto">
+                            <p className="text-gray-400 text-xs font-bold mb-2 uppercase tracking-wider">Console de Diagnóstico:</p>
+                            {testLog.map((log, i) => (
+                                <div key={i} className="font-mono text-xs py-1 border-b border-gray-800 last:border-0 break-all whitespace-pre-wrap" style={{
+                                    color: log.includes('❌') ? '#ff6b6b' : log.includes('✅') ? '#51cf66' : '#ced4da'
+                                }}>
+                                    {log}
+                                </div>
+                            ))}
+                        </div>
+                    )}
 
                     <form onSubmit={handleSaveSettings} className="space-y-6">
                         {/* Provider Selection */}
@@ -806,49 +831,52 @@ const Settings: React.FC = () => {
                         </tbody>
                     </table>
                 </div>
-            )}
+            )
+            }
 
-            {activeTab === 'appearance' && (
-                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 max-w-3xl">
-                    <h3 className="font-bold text-lg text-gray-800 mb-4">Personalização do Sistema</h3>
+            {
+                activeTab === 'appearance' && (
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 max-w-3xl">
+                        <h3 className="font-bold text-lg text-gray-800 mb-4">Personalização do Sistema</h3>
 
-                    <div className="space-y-6">
-                        <div className="flex items-start gap-4 p-4 border rounded-lg bg-gray-50">
-                            <div className="flex-1">
-                                <h4 className="font-bold text-gray-700 mb-1">Modo MacBook / Glassmorphism</h4>
-                                <p className="text-sm text-gray-500 mb-3">
-                                    Ativa um menu lateral flutuante com efeito de vidro (blur), ícones coloridos e visual minimalista inspirado no macOS.
-                                </p>
-                                <div className="flex items-center gap-4">
-                                    <label className="flex items-center gap-2 cursor-pointer">
-                                        <input
-                                            type="radio"
-                                            name="menuMode"
-                                            checked={menuMode === 'default'}
-                                            onChange={() => setMenuMode('default')}
-                                            className="accent-[#3a7ad1]"
-                                        />
-                                        <span className="text-gray-700">Padrão (Escuro)</span>
-                                    </label>
-                                    <label className="flex items-center gap-2 cursor-pointer">
-                                        <input
-                                            type="radio"
-                                            name="menuMode"
-                                            checked={menuMode === 'macbook'}
-                                            onChange={() => setMenuMode('macbook')}
-                                            className="accent-[#3a7ad1]"
-                                        />
-                                        <span className="text-gray-700 font-medium">Estilo MacBook (Vidro)</span>
-                                    </label>
+                        <div className="space-y-6">
+                            <div className="flex items-start gap-4 p-4 border rounded-lg bg-gray-50">
+                                <div className="flex-1">
+                                    <h4 className="font-bold text-gray-700 mb-1">Modo MacBook / Glassmorphism</h4>
+                                    <p className="text-sm text-gray-500 mb-3">
+                                        Ativa um menu lateral flutuante com efeito de vidro (blur), ícones coloridos e visual minimalista inspirado no macOS.
+                                    </p>
+                                    <div className="flex items-center gap-4">
+                                        <label className="flex items-center gap-2 cursor-pointer">
+                                            <input
+                                                type="radio"
+                                                name="menuMode"
+                                                checked={menuMode === 'default'}
+                                                onChange={() => setMenuMode('default')}
+                                                className="accent-[#3a7ad1]"
+                                            />
+                                            <span className="text-gray-700">Padrão (Escuro)</span>
+                                        </label>
+                                        <label className="flex items-center gap-2 cursor-pointer">
+                                            <input
+                                                type="radio"
+                                                name="menuMode"
+                                                checked={menuMode === 'macbook'}
+                                                onChange={() => setMenuMode('macbook')}
+                                                className="accent-[#3a7ad1]"
+                                            />
+                                            <span className="text-gray-700 font-medium">Estilo MacBook (Vidro)</span>
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className={`w-32 h-20 rounded-lg shadow-sm border flex items-center justify-center ${menuMode === 'macbook' ? 'bg-white/80 backdrop-blur-md' : 'bg-[#151d38]'}`}>
-                                <div className="text-xs font-mono opacity-50">Preview</div>
+                                <div className={`w-32 h-20 rounded-lg shadow-sm border flex items-center justify-center ${menuMode === 'macbook' ? 'bg-white/80 backdrop-blur-md' : 'bg-[#151d38]'}`}>
+                                    <div className="text-xs font-mono opacity-50">Preview</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            )}
+                )
+            }
 
             {/* Permissions Modal */}
             <Modal
@@ -1065,7 +1093,7 @@ const Settings: React.FC = () => {
                     </div>
                 </form>
             </Modal>
-        </div>
+        </div >
     );
 };
 
