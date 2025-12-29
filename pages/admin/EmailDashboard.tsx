@@ -18,6 +18,13 @@ const EmailDashboard: React.FC = () => {
 
     useEffect(() => {
         fetchStats();
+
+        // Auto-process queue every 60s while on dashboard
+        const interval = setInterval(() => {
+            emailFlowService.processQueue(5).then(() => fetchStats()).catch(console.error);
+        }, 60000);
+
+        return () => clearInterval(interval);
     }, []);
 
     const fetchStats = async () => {
@@ -119,6 +126,28 @@ const EmailDashboard: React.FC = () => {
                 </div>
             )}
 
+            <div className="flex justify-end mb-4">
+                <button
+                    onClick={async () => {
+                        const loadingBtn = document.getElementById('btn-process-queue');
+                        if (loadingBtn) loadingBtn.innerText = 'Processando...';
+                        try {
+                            const res = await emailFlowService.processQueue(5);
+                            alert(`Processamento concluído! ${res.length} e-mails processados.`);
+                            fetchStats();
+                        } catch (e: any) {
+                            alert('Erro: ' + e.message);
+                        } finally {
+                            if (loadingBtn) loadingBtn.innerText = 'Forçar Processamento da Fila';
+                        }
+                    }}
+                    id="btn-process-queue"
+                    className="flex items-center gap-2 text-xs font-bold bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-900 transition-colors"
+                >
+                    <RefreshCw size={14} /> Forçar Processamento da Fila
+                </button>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 {statCards.map((card, idx) => {
                     const Icon = card.icon;
@@ -153,7 +182,7 @@ const EmailDashboard: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

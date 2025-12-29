@@ -40,7 +40,7 @@ interface UserProfile {
 
 const Settings: React.FC = () => {
     const { profile, isAdmin } = useAuth();
-    const { menuMode, setMenuMode } = useTheme();
+    const { menuMode, setMenuMode, customTheme, updateCustomTheme } = useTheme();
     const [activeTab, setActiveTab] = useState<'general' | 'team' | 'appearance' | 'email'>('general');
     const [loading, setLoading] = useState(true);
     const [testLog, setTestLog] = useState<string[]>([]); // Log visual para debug
@@ -771,7 +771,7 @@ const Settings: React.FC = () => {
                         </div>
                     </form>
                 </div>
-            ) : (
+            ) : activeTab === 'team' ? (
                 <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                     <table className="w-full text-left">
                         <div className="p-4 flex justify-between items-center bg-gray-50 border-b border-gray-100">
@@ -832,48 +832,261 @@ const Settings: React.FC = () => {
                         </tbody>
                     </table>
                 </div>
-            )
-            }
+            ) : null}
 
             {
                 activeTab === 'appearance' && (
-                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 max-w-3xl">
-                        <h3 className="font-bold text-lg text-gray-800 mb-4">Personalização do Sistema</h3>
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 max-w-4xl animate-in fade-in slide-in-from-top-4">
+                        <div className="flex justify-between items-center mb-6">
+                            <div>
+                                <h3 className="font-bold text-lg text-gray-800">Personalização do Menu</h3>
+                                <p className="text-sm text-gray-500">Personalize a aparência do menu lateral. As alterações são salvas automaticamente neste dispositivo.</p>
+                            </div>
+                            <button
+                                onClick={() => {
+                                    setMenuMode('default');
+                                    updateCustomTheme({
+                                        menuSpacing: 'normal',
+                                        fontFamily: 'sans',
+                                        fontSize: 'base',
+                                        iconSize: 20,
+                                        menuViewMode: 'list',
+                                        gridColumns: 2,
+                                        primaryColor: '#3a7ad1',
+                                        sidebarColor: '#151d38',
+                                        textColor: '#ffffff'
+                                    });
+                                }}
+                                className="text-sm text-red-500 hover:text-red-700 font-medium"
+                            >
+                                Restaurar Padrões
+                            </button>
+                        </div>
 
-                        <div className="space-y-6">
-                            <div className="flex items-start gap-4 p-4 border rounded-lg bg-gray-50">
-                                <div className="flex-1">
-                                    <h4 className="font-bold text-gray-700 mb-1">Modo MacBook / Glassmorphism</h4>
-                                    <p className="text-sm text-gray-500 mb-3">
-                                        Ativa um menu lateral flutuante com efeito de vidro (blur), ícones coloridos e visual minimalista inspirado no macOS.
-                                    </p>
-                                    <div className="flex items-center gap-4">
-                                        <label className="flex items-center gap-2 cursor-pointer">
-                                            <input
-                                                type="radio"
-                                                name="menuMode"
-                                                checked={menuMode === 'default'}
-                                                onChange={() => setMenuMode('default')}
-                                                className="accent-[#3a7ad1]"
-                                            />
-                                            <span className="text-gray-700">Padrão (Escuro)</span>
-                                        </label>
-                                        <label className="flex items-center gap-2 cursor-pointer">
-                                            <input
-                                                type="radio"
-                                                name="menuMode"
-                                                checked={menuMode === 'macbook'}
-                                                onChange={() => setMenuMode('macbook')}
-                                                className="accent-[#3a7ad1]"
-                                            />
-                                            <span className="text-gray-700 font-medium">Estilo MacBook (Vidro)</span>
-                                        </label>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            {/* Left Column: Layout & Typography */}
+                            <div className="space-y-6">
+                                {/* View Mode */}
+                                <div className="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                                    <label className="block text-sm font-bold text-gray-700 mb-3">Modo de Visualização</label>
+                                    <div className="grid grid-cols-3 gap-2">
+                                        <button
+                                            onClick={() => updateCustomTheme({ menuViewMode: 'list' })}
+                                            className={`p-2 rounded-lg border text-sm flex flex-col items-center gap-2 transition-all ${customTheme.menuViewMode === 'list' ? 'bg-white border-blue-500 ring-1 ring-blue-500 text-blue-700' : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-100'}`}
+                                        >
+                                            <div className="space-y-1 w-full px-2">
+                                                <div className="h-1 w-full bg-current opacity-30 rounded"></div>
+                                                <div className="h-1 w-full bg-current opacity-30 rounded"></div>
+                                                <div className="h-1 w-full bg-current opacity-30 rounded"></div>
+                                            </div>
+                                            Lista
+                                        </button>
+                                        <button
+                                            onClick={() => updateCustomTheme({ menuViewMode: 'grid', gridColumns: 2 })}
+                                            className={`p-2 rounded-lg border text-sm flex flex-col items-center gap-2 transition-all ${customTheme.menuViewMode === 'grid' && customTheme.gridColumns === 2 ? 'bg-white border-blue-500 ring-1 ring-blue-500 text-blue-700' : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-100'}`}
+                                        >
+                                            <div className="grid grid-cols-2 gap-1 w-full px-2">
+                                                <div className="aspect-square bg-current opacity-30 rounded"></div>
+                                                <div className="aspect-square bg-current opacity-30 rounded"></div>
+                                            </div>
+                                            Grid (2 Col)
+                                        </button>
+                                        <button
+                                            onClick={() => updateCustomTheme({ menuViewMode: 'grid', gridColumns: 3 })}
+                                            className={`p-2 rounded-lg border text-sm flex flex-col items-center gap-2 transition-all ${customTheme.menuViewMode === 'grid' && customTheme.gridColumns === 3 ? 'bg-white border-blue-500 ring-1 ring-blue-500 text-blue-700' : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-100'}`}
+                                        >
+                                            <div className="grid grid-cols-3 gap-1 w-full px-1">
+                                                <div className="aspect-square bg-current opacity-30 rounded"></div>
+                                                <div className="aspect-square bg-current opacity-30 rounded"></div>
+                                                <div className="aspect-square bg-current opacity-30 rounded"></div>
+                                            </div>
+                                            Grid (3 Col)
+                                        </button>
                                     </div>
                                 </div>
-                                <div className={`w-32 h-20 rounded-lg shadow-sm border flex items-center justify-center ${menuMode === 'macbook' ? 'bg-white/80 backdrop-blur-md' : 'bg-[#151d38]'}`}>
-                                    <div className="text-xs font-mono opacity-50">Preview</div>
+
+                                {/* Typography Section */}
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className="block text-sm font-bold text-gray-700 mb-2">Fonte</label>
+                                        <div className="flex bg-gray-100 p-1 rounded-lg">
+                                            {[
+                                                { id: 'sans', label: 'Sans (Padrão)', font: 'sans-serif' },
+                                                { id: 'serif', label: 'Serif', font: 'serif' },
+                                                { id: 'mono', label: 'Mono', font: 'monospace' }
+                                            ].map((font) => (
+                                                <button
+                                                    key={font.id}
+                                                    onClick={() => updateCustomTheme({ fontFamily: font.id as any })}
+                                                    className={`flex-1 py-1.5 text-xs font-medium rounded-md transition-all ${customTheme.fontFamily === font.id ? 'bg-white shadow text-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
+                                                    style={{ fontFamily: font.font }}
+                                                >
+                                                    {font.label}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-bold text-gray-700 mb-2">Tamanho da Fonte</label>
+                                        <div className="flex bg-gray-100 p-1 rounded-lg">
+                                            {[
+                                                { id: 'sm', label: 'Pequena' },
+                                                { id: 'base', label: 'Média' },
+                                                { id: 'lg', label: 'Grande' }
+                                            ].map((size) => (
+                                                <button
+                                                    key={size.id}
+                                                    onClick={() => updateCustomTheme({ fontSize: size.id as any })}
+                                                    className={`flex-1 py-1.5 text-xs font-medium rounded-md transition-all ${customTheme.fontSize === size.id ? 'bg-white shadow text-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
+                                                >
+                                                    {size.label}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
+                            {/* Right Column: Colors & Spacing */}
+                            <div className="space-y-6">
+                                {/* Colors */}
+                                <div className="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                                    <label className="block text-sm font-bold text-gray-700 mb-3">Cores do Tema</label>
+                                    <div className="space-y-3">
+                                        <div className="flex items-center justify-between">
+                                            <span className="text-sm text-gray-600">Cor Principal (Ativo)</span>
+                                            <div className="flex items-center gap-2">
+                                                <input
+                                                    type="color"
+                                                    value={customTheme.primaryColor}
+                                                    onChange={(e) => updateCustomTheme({ primaryColor: e.target.value })}
+                                                    className="w-8 h-8 rounded cursor-pointer border-0"
+                                                />
+                                                <span className="text-xs font-mono text-gray-400">{customTheme.primaryColor}</span>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center justify-between">
+                                            <span className="text-sm text-gray-600">Fundo do Menu</span>
+                                            <div className="flex items-center gap-2">
+                                                <input
+                                                    type="color"
+                                                    value={customTheme.sidebarColor}
+                                                    onChange={(e) => updateCustomTheme({ sidebarColor: e.target.value })}
+                                                    className="w-8 h-8 rounded cursor-pointer border-0"
+                                                />
+                                                <span className="text-xs font-mono text-gray-400">{customTheme.sidebarColor}</span>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center justify-between">
+                                            <span className="text-sm text-gray-600">Texto</span>
+                                            <div className="flex items-center gap-2">
+                                                <input
+                                                    type="color"
+                                                    value={customTheme.textColor}
+                                                    onChange={(e) => updateCustomTheme({ textColor: e.target.value })}
+                                                    className="w-8 h-8 rounded cursor-pointer border-0"
+                                                />
+                                                <span className="text-xs font-mono text-gray-400">{customTheme.textColor}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Spacing & Icons */}
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className="block text-sm font-bold text-gray-700 mb-2">Espaçamento (Padding)</label>
+                                        <div className="flex bg-gray-100 p-1 rounded-lg">
+                                            {[
+                                                { id: 'compact', label: 'Compacto' },
+                                                { id: 'normal', label: 'Normal' },
+                                                { id: 'relaxed', label: 'Relaxado' }
+                                            ].map((space) => (
+                                                <button
+                                                    key={space.id}
+                                                    onClick={() => updateCustomTheme({ menuSpacing: space.id as any })}
+                                                    className={`flex-1 py-1.5 text-xs font-medium rounded-md transition-all ${customTheme.menuSpacing === space.id ? 'bg-white shadow text-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
+                                                >
+                                                    {space.label}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div className="flex justify-between mb-2">
+                                            <label className="block text-sm font-bold text-gray-700">Tamanho do Ícone</label>
+                                            <span className="text-xs text-gray-500">{customTheme.iconSize}px</span>
+                                        </div>
+                                        <input
+                                            type="range"
+                                            min="16"
+                                            max="48"
+                                            step="2"
+                                            value={customTheme.iconSize}
+                                            onChange={(e) => updateCustomTheme({ iconSize: parseInt(e.target.value) })}
+                                            className="w-full accent-[#3a7ad1]"
+                                        />
+                                        <div className="flex justify-between text-[10px] text-gray-400 mt-1">
+                                            <span>16px</span>
+                                            <span>32px</span>
+                                            <span>48px</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="pt-4 border-t border-gray-100">
+                                        <label className="block text-sm font-bold text-gray-700 mb-2">Efeitos & Estilo</label>
+                                        <div className="space-y-2">
+                                            <label className="flex items-center gap-3 cursor-pointer">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={customTheme.glassEffect}
+                                                    onChange={(e) => updateCustomTheme({ glassEffect: e.target.checked })}
+                                                    className="w-4 h-4 accent-[#3a7ad1] rounded"
+                                                />
+                                                <span className="text-sm text-gray-700">Efeito de Vidro (Glassmorphism)</span>
+                                            </label>
+                                            <label className="flex items-center gap-3 cursor-pointer">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={customTheme.colorfulIcons}
+                                                    onChange={(e) => updateCustomTheme({ colorfulIcons: e.target.checked })}
+                                                    className="w-4 h-4 accent-[#3a7ad1] rounded"
+                                                />
+                                                <span className="text-sm text-gray-700">Ícones Coloridos</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Mode Toggle Checkbox (Legacy support for MacBook mode) */}
+                        <div className="mt-8 pt-6 border-t border-gray-100">
+                            <div className="flex items-center gap-4">
+                                <label className="flex items-center gap-2 cursor-pointer">
+                                    <input
+                                        type="radio"
+                                        name="menuMode"
+                                        checked={menuMode === 'default'}
+                                        onChange={() => setMenuMode('default')}
+                                        className="w-4 h-4 text-blue-600"
+                                    />
+                                    <span className="text-sm font-medium text-gray-700">Edição Personalizada (Ativa)</span>
+                                </label>
+                                <label className="flex items-center gap-2 cursor-pointer opacity-70 hover:opacity-100">
+                                    <input
+                                        type="radio"
+                                        name="menuMode"
+                                        checked={menuMode === 'macbook'}
+                                        onChange={() => setMenuMode('macbook')}
+                                        className="w-4 h-4 text-blue-600"
+                                    />
+                                    <span className="text-sm font-medium text-gray-700">Modo MacBook (Glassmorphism Padrão)</span>
+                                </label>
+                            </div>
+                            <p className="text-xs text-gray-400 mt-2 ml-6">O Modo MacBook ignora as personalizações manuais acima para manter o padrão visual.</p>
                         </div>
                     </div>
                 )

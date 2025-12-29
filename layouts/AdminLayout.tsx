@@ -9,7 +9,7 @@ import { useTheme } from '../contexts/ThemeContext';
 
 const AdminLayout: React.FC = () => {
     const { signOut, user, profile } = useAuth();
-    const { menuMode } = useTheme();
+    const { menuMode, customTheme } = useTheme();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -79,31 +79,99 @@ const AdminLayout: React.FC = () => {
     // Mobile Menu State
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+    // Helper for Glass Effect
+    const hexToRgba = (hex: string, alpha: number) => {
+        let r = 0, g = 0, b = 0;
+        if (hex.length === 4) {
+            r = parseInt(hex[1] + hex[1], 16);
+            g = parseInt(hex[2] + hex[2], 16);
+            b = parseInt(hex[3] + hex[3], 16);
+        } else if (hex.length === 7) {
+            r = parseInt(hex[1] + hex[2], 16);
+            g = parseInt(hex[3] + hex[4], 16);
+            b = parseInt(hex[5] + hex[6], 16);
+        }
+        return `rgba(${r},${g},${b},${alpha})`;
+    };
+
     return (
         <div className={`flex h-screen ${isMacBook ? 'bg-cover bg-center bg-no-repeat' : 'bg-gray-100'}`} style={isMacBook ? { backgroundImage: 'url("https://4kwallpapers.com/images/wallpapers/macos-monterey-stock-light-layer-5k-5120x2880-5897.jpg")' } : {}}>
 
             {/* Standard Sidebar (Hidden in MacBook Mode) */}
             {!isMacBook && (
-                <aside className="w-64 bg-[#151d38] text-white hidden md:flex flex-col">
+                <aside
+                    className={`hidden md:flex flex-col transition-all duration-300 ${isMacBook ? 'w-64' : customTheme.menuViewMode === 'grid' ? (customTheme.gridColumns === 3 ? 'w-80' : 'w-64') : 'w-64'} ${customTheme.glassEffect ? 'backdrop-blur-xl border-r border-white/20 shadow-xl' : ''}`}
+                    style={{
+                        backgroundColor: customTheme.glassEffect ? hexToRgba(customTheme.sidebarColor, 0.85) : customTheme.sidebarColor,
+                        color: customTheme.textColor
+                    }}
+                >
                     <div className="p-6">
-                        <h1 className="text-2xl font-bold tracking-tight">E-Lance <span className="text-[#3a7ad1]">Admin</span></h1>
+                        <h1 className={`font-bold tracking-tight ${customTheme.fontSize === 'lg' ? 'text-3xl' : customTheme.fontSize === 'sm' ? 'text-xl' : 'text-2xl'}`} style={{ fontFamily: customTheme.fontFamily }}>
+                            E-Lance <span style={{ color: customTheme.primaryColor }}>Admin</span>
+                        </h1>
                     </div>
 
-                    <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto custom-scrollbar">
+                    <nav className={`flex-1 px-4 py-6 overflow-y-auto custom-scrollbar ${customTheme.menuViewMode === 'grid'
+                            ? `grid ${customTheme.gridColumns === 3 ? 'grid-cols-3' : 'grid-cols-2'} gap-2 content-start`
+                            : 'space-y-1'
+                        }`}>
                         {menuItems.map((item) => {
                             if (!canSee(item.key)) return null;
                             const active = location.pathname.includes(item.path);
+
+                            // Grid Mode Item
+                            if (customTheme.menuViewMode === 'grid') {
+                                return (
+                                    <Link
+                                        key={item.path}
+                                        to={item.path}
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                        className={`flex flex-col items-center justify-center p-3 rounded-xl transition-all aspect-square border ${active
+                                                ? 'bg-opacity-20 border-opacity-30' // Grid active state is subtle
+                                                : 'border-transparent hover:bg-white/5'
+                                            }`}
+                                        style={{
+                                            backgroundColor: active ? customTheme.primaryColor : 'transparent',
+                                            borderColor: active ? customTheme.primaryColor : 'transparent'
+                                        }}
+                                        title={item.label}
+                                    >
+                                        <item.icon
+                                            size={customTheme.iconSize + 4}
+                                            className={customTheme.colorfulIcons && !active ? getIconColor(item.key) : ''}
+                                            style={{ color: active ? customTheme.primaryColor : (customTheme.colorfulIcons ? undefined : customTheme.textColor) }}
+                                        />
+                                        <span className="text-[10px] text-center mt-1 truncate w-full" style={{ fontFamily: customTheme.fontFamily }}>
+                                            {item.label.split(' ')[0]}
+                                        </span>
+                                    </Link>
+                                );
+                            }
+
+                            // List Mode Item
+                            const pyClass = customTheme.menuSpacing === 'compact' ? 'py-2' : customTheme.menuSpacing === 'relaxed' ? 'py-4' : 'py-3';
+                            const textClass = customTheme.fontSize === 'sm' ? 'text-xs' : customTheme.fontSize === 'lg' ? 'text-lg' : 'text-sm';
+
                             return (
                                 <Link
                                     key={item.path}
                                     to={item.path}
-                                    className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${active
-                                        ? 'bg-[#3a7ad1] text-white'
-                                        : 'text-gray-400 hover:bg-[#1e2a4a] hover:text-white'
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className={`flex items-center gap-3 px-4 rounded-lg transition-colors ${pyClass} ${active ? 'bg-opacity-100 shadow-sm' : 'hover:bg-white/5'
                                         }`}
+                                    style={{
+                                        backgroundColor: active ? customTheme.primaryColor : 'transparent',
+                                        color: active ? '#fff' : customTheme.textColor,
+                                        fontFamily: customTheme.fontFamily
+                                    }}
                                 >
-                                    <item.icon size={20} />
-                                    <span className="font-medium">{item.label}</span>
+                                    <item.icon
+                                        size={customTheme.iconSize}
+                                        className={customTheme.colorfulIcons && !active ? getIconColor(item.key) : ''}
+                                        style={{ color: active ? '#fff' : (customTheme.colorfulIcons ? undefined : customTheme.textColor) }}
+                                    />
+                                    <span className={`font-medium ${textClass}`}>{item.label}</span>
                                 </Link>
                             );
                         })}
@@ -111,7 +179,8 @@ const AdminLayout: React.FC = () => {
 
                     <div className="p-4 border-t border-white/10">
                         <button onClick={signOut} className="flex items-center gap-3 px-4 py-3 w-full text-red-400 hover:bg-white/5 rounded-lg transition-colors">
-                            <LogOut size={20} /> Sair
+                            <LogOut size={customTheme.iconSize} />
+                            <span style={{ fontFamily: customTheme.fontFamily, fontSize: customTheme.fontSize === 'sm' ? '0.8rem' : '1rem' }}>Sair</span>
                         </button>
                     </div>
                 </aside>
