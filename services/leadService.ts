@@ -8,14 +8,19 @@ export interface LeadData {
     source: string;
     notes?: string;
     tags?: string[];
-    franchise_unit_id?: string;
+    franchise_id?: string;
+    franchise_unit_id?: string; // Kept for emailFlowService
 }
 
 export const leadService = {
     async captureLead(data: LeadData) {
         try {
+            console.log('Capturing lead:', data);
+            
             // 1. Save to 'leads' table
-            const { data: lead, error: leadError } = await supabase
+            // We don't use .select().single() because RLS policies for anonymous users
+            // often allow INSERT but not SELECT, which would cause an error even if insert succeeded.
+            const { error: leadError } = await supabase
                 .from('leads')
                 .insert([{
                     name: data.name,
@@ -24,13 +29,13 @@ export const leadService = {
                     source: data.source,
                     status: 'new',
                     notes: data.notes || '',
-                    tags: data.tags || [],
-                    franchise_unit_id: data.franchise_unit_id
-                }])
-                .select()
-                .single();
+                    franchise_id: data.franchise_id || data.franchise_unit_id
+                }]);
 
-            if (leadError) throw leadError;
+            if (leadError) {
+                console.error('Supabase Lead Insert Error:', leadError);
+                throw leadError;
+            }
 
             // 2. Sync to email marketing (centralized sync)
             try {
@@ -40,14 +45,13 @@ export const leadService = {
                     telefone: data.phone,
                     origem: data.source,
                     interesses: data.tags || [],
-                    franchise_unit_id: data.franchise_unit_id
+                    franchise_unit_id: data.franchise_unit_id || data.franchise_id
                 });
             } catch (syncError) {
-                console.error('Error syncing lead to email marketing:', syncError);
-                // Non-blocking error
+                console.warn('Non-blocking error syncing to email marketing:', syncError);
             }
 
-            return lead;
+            return { success: true };
         } catch (error) {
             console.error('Error in leadService.captureLead:', error);
             throw error;

@@ -27,7 +27,7 @@ const Detran = () => {
         phone: formData.phone,
         source: 'Página Detran',
         tags: ['Leilão Detran', 'Interesse +1000 Veículos'],
-        franchise_unit_id: branding?.id
+        franchise_id: branding?.id
       });
       setStatus('success');
       setFormData({ name: '', email: '', phone: '' });

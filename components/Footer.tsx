@@ -83,9 +83,13 @@ const Footer: React.FC = () => {
       {/* Bottom Bar */}
       <div className="bg-[#151d38] py-6 border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm text-center md:text-left mb-4 md:mb-0">
-            © {new Date().getFullYear()} E-lance. Todos os direitos reservados.
-          </p>
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-gray-400 text-sm text-center md:text-left mb-4 md:mb-0">
+            <p>© {new Date().getFullYear()} E-lance. Todos os direitos reservados.</p>
+            <span className="hidden md:inline opacity-30">|</span>
+            <p>
+              Desenvolvido por <a href="https://2timeweb.com.br/" target="_blank" rel="noopener noreferrer" className="hover:text-[#3a7ad1] transition-colors font-medium">2timeweb - Daniel Marques</a>
+            </p>
+          </div>
           <button
             onClick={scrollToTop}
             className="flex items-center text-gray-400 hover:text-white text-sm transition-colors group"
