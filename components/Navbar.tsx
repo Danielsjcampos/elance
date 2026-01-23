@@ -59,6 +59,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
           if (el) el.scrollIntoView({ behavior: 'smooth' });
         }, 100);
       }
+    } else if (item.href.startsWith('/')) {
+      navigate(item.href);
     }
   };
 

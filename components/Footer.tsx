@@ -54,6 +54,7 @@ const Footer: React.FC = () => {
               <li><a href="#school" className="text-gray-600 hover:text-[#3a7ad1] transition-colors text-sm font-medium">Escola E-Lance</a></li>
               <li><a href="#portal" className="text-gray-600 hover:text-[#3a7ad1] transition-colors text-sm font-medium">Portal de Leilões</a></li>
               <li><a href="#consulting" className="text-gray-600 hover:text-[#3a7ad1] transition-colors text-sm font-medium">Consultoria</a></li>
+              <li><a href="/detran" className="text-gray-600 hover:text-[#3a7ad1] transition-colors text-sm font-medium font-bold">Leilão Detran (+1000 Veículos)</a></li>
             </ul>
           </div>
 

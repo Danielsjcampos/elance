@@ -49,6 +49,7 @@ import AiAssistant from './pages/admin/AiAssistant';
 import EmailFlowCenter from './pages/admin/EmailFlowCenter';
 import MinimalLayout from './layouts/MinimalLayout';
 import LpElance from './pages/LpElance';
+import Detran from './pages/Detran';
 
 function App() {
   return (
@@ -75,6 +76,7 @@ function App() {
                   <Route path="ecossistema" element={<Ecossistema />} />
                   <Route path="indique" element={<Indique />} />
                   <Route path="bid-invest" element={<BidInvest />} />
+                  <Route path="detran" element={<Detran />} />
                 </Route>
 
                 <Route element={<MinimalLayout />}>

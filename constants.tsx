@@ -69,6 +69,7 @@ export const NAV_ITEMS: NavItem[] = [
       { label: "Curso Imóveis", href: "#", id: "curso-imoveis" },
       { label: "Curso para Advogados", href: "#", id: "curso-advogados" },
       { label: "Downloads", href: "#", id: "downloads" },
+      { label: "Leilão Detran (+1000 Veículos)", href: "/detran" },
       { label: "Artigos", href: "#articles" }
     ]
   },
